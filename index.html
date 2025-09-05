@@ -1,0 +1,215 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>reveal.js</title>
+
+		<link rel="stylesheet" href="dist/reset.css">
+		<link rel="stylesheet" href="dist/reveal.css">
+		<link rel="stylesheet" href="dist/theme/black.css">
+
+		<!-- Theme used for syntax highlighted code -->
+		<link rel="stylesheet" href="plugin/highlight/monokai.css">
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+				<section>
+					<h1>React</h1>
+					<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/React-icon.svg/1280px-React-icon.svg.png" alt="logo" width="200px">
+				</section>
+				<section>
+					<section>
+						<h3>What is React?</h3>
+					</section>
+					<section>
+						<p>React is a tool for creating user interfaces. Its main task is to ensure that what can be seen on web pages is displayed on the screen. React greatly facilitates the creation of interfaces by splitting each page into small fragments. These fragments are called components.</p>
+					</section>
+				</section>
+				<section>
+					<section>
+						<h3>What is the React component?</h3>
+					</section>
+					<section>
+						<p>The React component is a piece of code that represents a part of a web page. Each component is a JavaScript function that returns a piece of code representing a page fragment.</p>
+					</section>
+					<section>
+						<img src="./examples/assets/components.png" alt="components image" />
+					</section>
+					<section>
+						<p>To form a page, we call these functions in a certain order, collect the results of the calls together and show them to the user.</p>
+						<img src="./examples/assets/img1.png" alt="image 1" />
+					</section>
+					<section>
+						<p>React uses a programming language called JSX, which is similar to HTML, but works inside JavaScript, which distinguishes it from HTML.</p>
+						<img src="./examples/assets/img2.png" alt="image 2" />
+					</section>
+					<section>
+						<img src="./examples/assets/img3.png" alt="image 3" />
+					</section>
+				</section>
+				<section>
+					<section>
+						<h3>Assembling components</h3>
+					</section>
+					<section>
+						<p>React components can be placed in other components.</p>
+						<img src="./examples/assets/img4.png" alt="image 4" />
+					</section>
+				</section>
+				<section>
+					<section>
+						<h3>Component classes</h3>
+					</section>
+					<section>
+						<p>Before that, we wrote components in the form of functions. They are called functional components. However, components can be written differently, in the form of JavaScript classes. They are called component classes.</p>
+						<img src="./examples/assets/img5.png" alt="image 5" />
+					</section>
+					<section>
+						<p>Component classes must contain a function called render(). This function returns the component's JS code. They can also be used as functional components, for example, by referring to them using a construction: </p>
+						<img src="./examples/assets/img6.png" alt="image 6" />
+					</section>
+				</section>
+				<section>
+					<section>
+						<h3>JavaScript in JSX</h3>
+					</section>
+					<section>
+						<p>JavaScript variables can be placed in JSX code.</p>
+						<img src="./examples/assets/img7.png" alt="image 7" />
+					</section>
+					<section>
+						<img src="./examples/assets/img8.png" alt="image 8" />
+					</section>
+				</section>
+				<section>
+					<section>
+						<h3>Features of the component being created</h3>
+					</section>
+					<section>
+						<p>Class-based components can store information about the current situation. This information is called state, it is stored in a JS object. </p>
+					</section>
+					<section>
+						<img src="./examples/assets/img9.png" alt="image 9" />
+					</section>
+				</section>
+				<section>
+					<section>
+						<h3>Changing a React component based on its state</h3>
+					</section>
+					<section>
+						<p>State is a tool that allows you to update the user interface based on events.</p>
+					</section>
+					<section>
+						<img src="./examples/assets/img10.png" alt="image 10" />
+						<p>In the render function, the this keyword always refers to the component inside which it is located.</p>
+					</section>
+				</section>
+				<section>
+					<section>
+						<h3>How does the component react to events?</h3>
+					</section>
+					<section>
+						<p>The user can interact with the component by clicking on the music playback button. We want to respond to these events. This is done through a function that handles events. These functions are called event handlers.</p>
+					</section>
+					<section>
+						<img src="./examples/assets/img11.png" alt="image 11" />
+					</section>
+				</section>
+				<section>
+					<section>
+						<h3>How the component should work</h3>
+					</section>
+					<section>
+						<p>When the state of the component changes, it will call the render function again.</p>
+						<img src="./examples/assets/img12.png" alt="image 12" />
+					</section>
+				</section>
+				<section>
+					<section>
+						<h3>Data exchange between components</h3>
+					</section>
+					<section>
+						<ul>
+							<li>
+								<p>Components can "communicate" with each other.</p>
+							</li>
+							<li>
+								<p>Properties in JS look the same as HTML properties.</p>
+							</li>
+						</ul>
+					</section>
+					<section>
+						<img src="./examples/assets/img13.png" alt="image 13" />
+					</section>
+					<section>
+						<img src="./examples/assets/img14.png" alt="image 14" />
+						</section>
+				</section>
+				<section>
+					<section>
+						<h3>Events as properties</h3>
+					</section>
+					<section>
+						<p>Properties don't necessarily have to be some kind of data. They can also be functions.</p>
+						<img src="./examples/assets/img15.png" alt="image 15" />
+					</section>
+				</section>
+				<section>
+					<section>
+						<h3>Feature of setState</h3>
+					</section>
+					<section>
+						<ul>
+							<li>
+								<p>When calling setState, the state change is not instantaneous. React waits a bit to see if any more changes need to be made, and only then makes a state change. This means that it is impossible to know exactly what the state of the component will be after calling setState.</p>
+							</li>
+							<li>
+								<p>If you change the state based on the previous state, you should pass setState to a function, not an object. This function takes the old state as an argument and returns an object representing the new state.</p>
+							</li>
+						</ul>
+					</section>
+					<section>
+						<img src="./examples/assets/img16.png" alt="image 16" />
+					</section>
+				</section>
+				<section>
+					<section>
+						<h3>What are links?</h3>
+					</section>
+					<section>
+						<img src="./examples/assets/img17.png" alt="image 17" />
+					</section>
+					<section>
+						<p>We assign an attribute to the element, called ref, which takes a function. This function, as the first argument, takes the "audio" element, and assigns it to this.audio.</p>
+						<img src="./examples/assets/img18.png" alt="image 18" />
+					</section>
+					<section>
+						<img src="./examples/assets/img19.png" alt="image 19" />
+					</section>
+				</section>
+				<section>
+					<h3>Thank you for watching my presentation!</h3>
+				</section>
+			</div>
+		</div>
+
+		<script src="dist/reveal.js"></script>
+		<script src="plugin/notes/notes.js"></script>
+		<script src="plugin/markdown/markdown.js"></script>
+		<script src="plugin/highlight/highlight.js"></script>
+		<script>
+			// More info about initialization & config:
+			// - https://revealjs.com/initialization/
+			// - https://revealjs.com/config/
+			Reveal.initialize({
+				hash: true,
+
+				// Learn about plugins: https://revealjs.com/plugins/
+				plugins: [ RevealMarkdown, RevealHighlight, RevealNotes ]
+			});
+		</script>
+	</body>
+</html>
