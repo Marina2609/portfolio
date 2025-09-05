@@ -1,3 +1,17 @@
+const setting = document.querySelector(".setting");
+const settings = document.querySelector(".settings");
+const eng = document.querySelector(".eng");
+const rus = document.querySelector(".rus");
+const checkbox0 = document.querySelector(".checkbox0");
+const checkbox1 = document.querySelector(".checkbox1");
+const checkbox2 = document.querySelector(".checkbox2");
+const checkbox3 = document.querySelector(".checkbox3");
+const checkbox4 = document.querySelector(".checkbox4");
+const checkbox5 = document.querySelector(".checkbox5");
+const checkbox6 = document.querySelector(".checkbox6");
+const checkbox7 = document.querySelector(".checkbox7");
+
+// Чекбоксы для скрытия элементов
 const hideAudioPlayer = document.getElementById("hide-AudioPlayer");
 const hideToDoList = document.getElementById("hide-ToDoList");
 const hideWeather = document.getElementById("hide-Weather");
