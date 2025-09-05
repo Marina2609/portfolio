@@ -1,54 +1,237 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link href="assets/favicon.ico" rel="shortcut icon" />
-  <link rel="stylesheet" href="css/owfont-regular.css" />
-  <link rel="stylesheet" href="css/style.css" />
-  <title>momentum</title>
-</head>
-<body>
-  <header class="header">
-    <div class="player">
-      <div class="player-controls">
-        <button class="play-prev player-icon"></button>
-        <button class="play player-icon"></button>
-        <button class="play-next player-icon"></button>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="assets/favicon.ico" rel="shortcut icon" />
+    <link rel="stylesheet" href="css/owfont-regular.css" />
+    <link rel="stylesheet" href="css/style.css" />
+    <title>momentum</title>
+  </head>
+  <body>
+    <header class="header">
+      <div class="player" id="player">
+        <div class="player-panel">
+          <div class="audio-player">
+            <audio id="audio" src="assets/sounds/Aqua Caelestis.mp3"></audio>
+            <div id="controls">
+              <div class="nameTreck">
+                <p>
+                  <span class="track-name"></span>
+                </p>
+              </div>
+              <div class="progress">
+                <input
+                  type="range"
+                  value="0"
+                  min="0"
+                  max="100"
+                  step="1"
+                  class="slider play-time"
+                />
+                <button class="sound-btn"></button>
+                <input
+                  type="range"
+                  value="50"
+                  min="0"
+                  max="100"
+                  step="1"
+                  class="slider volume-control"
+                />
+              </div>
+              <div class="curDurTime">
+                <span class="current-time">00:00</span>
+                <span class="duration-time">00:00</span>
+              </div>
+            </div>
+          </div>
+          <div class="player-controls">
+            <button class="play-prev player-icon"></button>
+            <button class="play player-icon"></button>
+            <button class="play-next player-icon"></button>
+          </div>
+        </div>
+
+        <ul class="play-list"></ul>
       </div>
-      <ul class="play-list"></ul>
-    </div>
-    <div class="weather">
-      <input type="text" class="city" />
-      <i class="weather-icon owf"></i>
-      <div class="weather-error"></div>
-      <div class="description-container">
-        <span class="temperature"></span>
-        <span class="weather-description"></span>
+
+      <div class="weather" id="weather">
+        <input type="text" class="city" value="" />
+        <i class="weather-icon owf"></i>
+        <div class="weather-error"></div>
+        <div class="description-container">
+          <span class="temperature" textContent=""></span>
+          <span class="weather-description" textContent=""></span>
+        </div>
+        <div class="wind"></div>
+        <div class="humidity"></div>
       </div>
-      <div class="wind"></div>
-      <div class="humidity"></div>
-    </div>
-  </header>
-  <main class="main">
-    <div class="slider-icons">
-      <button class="slide-prev slider-icon"></button>
-      <button class="slide-next slider-icon"></button>
-    </div>
-    <time class="time"></time>
-    <date class="date"></date>
-    <div class="greeting-container">
-      <span class="greeting"></span>
-      <input type="text" class="name" />
-    </div>
-  </main>
-  <footer class="footer">
-    <button class="change-quote"></button>
-    <div>
-      <div class="quote"></div>
-      <div class="author"></div>
-    </div>
-  </footer>
-  <script src="js/script.js"></script>
-</body>
+    </header>
+    <main class="main">
+      <div class="slider-icons">
+        <button class="slide-prev slider-icon"></button>
+        <button class="slide-next slider-icon"></button>
+      </div>
+      <time class="time" id="time"></time>
+      <date class="date" id="date"></date>
+      <div class="greeting-container" id="greeting-container">
+        <span class="greeting"></span>
+        <input type="text" class="name" placeholder="" value="" />
+      </div>
+      <div class="todo" id="todo">
+        <div class="todo__input">
+          <input class="todo__text" type="text" />
+          <span class="todo__add"></span>
+        </div>
+        <select class="todo__options">
+          <option value="active">
+            <span class="todo-active">active</span>
+          </option>
+          <option value="completed">
+            <span class="todo-completed">completed</span>
+          </option>
+        </select>
+        <ul class="todo__items" data-todo-option="active"></ul>
+      </div>
+    </main>
+    <footer class="footer">
+      <button class="change-quote" id="change-quote"></button>
+      <div id="quotes">
+        <div class="quote"></div>
+        <div class="author"></div>
+      </div>
+
+      <div class="panel" id="panel">
+        <div class="github" id="github">
+          <a href="https://github.com/Marina2609" target="blank">
+            <img class="logo" src="./assets/svg/github.png" alt="github logo" />
+          </a>
+        </div>
+        <div class="year" id="year">
+          <span>2021</span>
+        </div>
+        <button class="settings"></button>
+      </div>
+
+      <div class="mainModal" id="close_modal"></div>
+      <!-- Модальное диалоговое окно -->
+      <div id="modal" class="modal">
+        <a href="#mainModal" class="modal_area"></a>
+        <!-- Содержание -->
+        <div class="modal-content">
+          <a href="#main" class="mainModal">
+            <span class="close">&times;</span>
+          </a>
+          <div class="modal-wrapper">
+            <div class="header-setting">
+              <span class="setting"></span>
+            </div>
+            <div class="modal_container">
+              <div class="left_modal">
+                <form name="lang" class="lang">
+                  <label
+                    ><input type="radio" checked name="one" id="langEn" /><span
+                      class="eng"
+                    ></span
+                  ></label>
+                  <label
+                    ><input type="radio" name="one" id="langRu" /><span
+                      class="rus"
+                    ></span
+                  ></label>
+                </form>
+                <form name="myForm" class="myForm">
+                  <label
+                    ><input
+                      type="radio"
+                      checked
+                      name="dva"
+                      id="standard-collection"
+                    /><span class="standard">Standard</span></label
+                  >
+                  <label
+                    ><input
+                      type="radio"
+                      name="dva"
+                      id="unsplash-collection"
+                    /><span class="unsplash">Unsplash API</span></label
+                  >
+                  <label
+                    ><input
+                      type="radio"
+                      name="dva"
+                      id="flickr-collection"
+                    /><span class="flickr">Flickr API</span></label
+                  >
+                  <input type="text" class="what" placeholder="" value="" />
+                </form>
+              </div>
+              <div class="rigth_modal">
+                <form name="hide" class="hide">
+                  <label class="hideObj">
+                    <input
+                      type="checkbox"
+                      name="hideObj"
+                      id="hide-AudioPlayer"
+                    />
+                    <span class="checkbox0"></span>
+                  </label>
+                  <label class="hideObj"
+                    ><input
+                      type="checkbox"
+                      name="hideObj"
+                      id="hide-ToDoList" /><span class="checkbox1"></span
+                  ></label>
+                  <label class="hideObj"
+                    ><input
+                      type="checkbox"
+                      name="hideObj"
+                      id="hide-Weather" /><span class="checkbox2"></span
+                  ></label>
+                  <label class="hideObj"
+                    ><input
+                      type="checkbox"
+                      name="hideObj"
+                      id="hide-Quotes" /><span class="checkbox3"></span
+                  ></label>
+                  <label class="hideObj"
+                    ><input
+                      type="checkbox"
+                      name="hideObj"
+                      id="hide-Date" /><span class="checkbox4"></span
+                  ></label>
+                  <label class="hideObj"
+                    ><input
+                      type="checkbox"
+                      name="hideObj"
+                      id="hide-Time" /><span class="checkbox5"></span
+                  ></label>
+                  <label class="hideObj"
+                    ><input
+                      type="checkbox"
+                      name="hideObj"
+                      id="hide-Greeting" /><span class="checkbox6"></span
+                  ></label>
+                  <label class="hideObj"
+                    ><input
+                      type="checkbox"
+                      name="hideObj"
+                      id="hide-GitHub" /><span class="checkbox7"></span
+                  ></label>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <script src="js/script.js" defer></script>
+    <script src="js/background.js" defer></script>
+    <script src="js/weather.js" defer></script>
+    <script src="js/quotes.js" defer></script>
+    <script src="js/modal.js" defer></script>
+    <script src="js/mp3Player.js" defer></script>
+    <script src="js/todo.js" defer></script>
+  </body>
 </html>
