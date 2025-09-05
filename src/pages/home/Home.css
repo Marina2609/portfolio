@@ -1,0 +1,97 @@
+.page-home {
+  flex: 1; /* занимает всё доступное пространство */
+  word-wrap: break-word;
+  color: #ffffff;
+  background-color: #232323;
+  background-image: url("../../../public/assets/img/background.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  display: flex;
+}
+
+.page-home__overlay {
+  background-color: rgba(0, 0, 0, 0.6);
+  flex: 1;
+}
+
+.page-home__overlay-heading {
+  background: #ffffff40;
+  color: #ececec;
+  margin: 0 0 30px 0;
+  text-align: center;
+  font-family: "Noto Serif Display", serif;
+  font-size: 45px;
+  font-weight: 400;
+}
+
+.page-home__container,
+.page-description {
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+  justify-content: center;
+  max-width: 70%;
+}
+
+.page-home__container {
+  padding-bottom: 80px;
+}
+
+.content-card {
+  opacity: 0.8;
+  text-align: center;
+  /* min-width: 80px; */
+  width: 300px;
+  transition: all 0.4s ease-in-out;
+}
+
+.content-card__heading {
+  background-color: #f3f3f3;
+  color: #292929;
+  font-size: 18px;
+  font-weight: 400;
+  padding: 30px 25px;
+  margin: 0;
+}
+
+.content-card .content-card__list--no-space {
+  padding: 20px 15px;
+  height: 293px;
+}
+
+.content-card__list--no-space {
+  background-color: #fff;
+  color: #888;
+  font-style: italic;
+
+  margin: 0 15px;
+}
+
+.content-card__list {
+  padding: 12px 0;
+}
+
+.content-card__link {
+  margin: 0;
+}
+
+.content-card__link a {
+  background-color: #8aba56;
+  color: #fff;
+  font-weight: bold;
+  padding: 16px 0;
+  text-transform: uppercase;
+  display: block;
+}
+
+@media (max-width: 934px) {
+  .page-home__overlay-heading {
+    font-size: 28px;
+  }
+}
+
+.game-content {
+  background: #fff;
+}
