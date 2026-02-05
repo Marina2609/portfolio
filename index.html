@@ -56,15 +56,19 @@
       </div>
 
       <div class="weather" id="weather">
-        <input type="text" class="city" value="" />
-        <i class="weather-icon owf"></i>
-        <div class="weather-error"></div>
+        <input type="text" id="city" class="city" value="" />
+        <i id="weather-icon" class="weather-icon owf"></i>
+        <div id="weather-error" class="weather-error"></div>
         <div class="description-container">
-          <span class="temperature" textContent=""></span>
-          <span class="weather-description" textContent=""></span>
+          <span id="temperature" class="temperature" textContent=""></span>
+          <span
+            id="weather-description"
+            class="weather-description"
+            textContent=""
+          ></span>
         </div>
-        <div class="wind"></div>
-        <div class="humidity"></div>
+        <div id="wind" class="wind"></div>
+        <div id="humidity" class="humidity"></div>
       </div>
     </header>
     <main class="main">
@@ -76,7 +80,7 @@
       <date class="date" id="date"></date>
       <div class="greeting-container" id="greeting-container">
         <span class="greeting"></span>
-        <input type="text" class="name" placeholder="" value="" />
+        <input type="text" id="name" class="name" placeholder="" value="" />
       </div>
       <div class="todo" id="todo">
         <div class="todo__input">

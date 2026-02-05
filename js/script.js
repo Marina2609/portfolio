@@ -107,24 +107,7 @@ function nowTimeOfDay(dateObj) {
   greeting.textContent = greetingText;
 }
 
-/*---------------- Сохранение имени пользователя в localStorage ------------*/
-function setLocalStorage() {
-  if (yourName) {
-    localStorage.setItem("name", yourName.value);
-  }
-}
-
-window.addEventListener("beforeunload", setLocalStorage);
-
-/*---------------- Загрузка имени пользователя из localStorage ------------*/
-function getLocalStorage() {
-  if (yourName && localStorage.getItem("name")) {
-    yourName.value = localStorage.getItem("name");
-  }
-}
-
 window.addEventListener("load", () => {
-  getLocalStorage();
   showTime();
 });
 

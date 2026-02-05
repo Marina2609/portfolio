@@ -1,12 +1,12 @@
-const city = document.querySelector(".city");
-const weatherError = document.querySelector(".weather-error");
-const weatherIcon = document.querySelector(".weather-icon");
-const temperature = document.querySelector(".temperature");
-const wind = document.querySelector(".wind");
-const humidity = document.querySelector(".humidity");
-const weatherDescription = document.querySelector(".weather-description");
+const city = document.getElementById("city");
+const weatherError = document.getElementById("weather-error");
+const weatherIcon = document.getElementById("weather-icon");
+const temperature = document.getElementById("temperature");
+const wind = document.getElementById("wind");
+const humidity = document.getElementById("humidity");
+const weatherDescription = document.getElementById("weather-description");
 
-const yourName = document.querySelector(".name");
+const yourName = document.getElementById("name");
 
 const API_KEY = "31074e3dd175bc11dbc271bb99940c09";
 
@@ -100,6 +100,9 @@ updateLanguageSettings();
 /*---------------- Локальное хранилище ------------*/
 function setLocalStorage() {
   localStorage.setItem("city", city.value);
+  if (yourName) {
+    localStorage.setItem("name", yourName.value);
+  }
 }
 
 function getLocalStorage() {
@@ -111,6 +114,10 @@ function getLocalStorage() {
     updateLanguageSettings();
   }
   getWeather();
+
+  if (yourName && localStorage.getItem("name")) {
+    yourName.value = localStorage.getItem("name");
+  }
 }
 
 window.addEventListener("beforeunload", setLocalStorage);
