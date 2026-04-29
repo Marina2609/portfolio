@@ -5,7 +5,7 @@
   "name": "museum",
   "scripts": {
     "start": "rss-scripts start",
-    "build": "NODE_OPTIONS=--openssl-legacy-provider rss-scripts build"
+    "build": "rss-scripts build"
   },
   "devDependencies": {
     "rss-scripts": "^0.2.1"
