@@ -7,6 +7,7 @@ function debounce(func, wait = 20, immediate = true) {
 
     var later = function () {
       timeout = null;
+
       if (!immediate) func.apply(context, args);
     };
 
@@ -24,7 +25,6 @@ const images = document.querySelectorAll(".gallery-img");
 function showImages(e) {
   images.forEach((image) => {
     const slideInAt = window.scrollY + window.innerHeight;
-    // const imageBottom = image.offsetTop + image.height;
     const isHalfShown = slideInAt > image.offsetTop;
 
     if (isHalfShown) {

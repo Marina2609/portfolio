@@ -1,11 +1,13 @@
 mapboxgl.accessToken =
   "pk.eyJ1Ijoic2FoYXY1MDAiLCJhIjoiY2t1Y3g0bnZqMTUxczJxcXZ3NmtqajdtMyJ9.5d40H3jkosojmMLd3oAhhQ";
+
 const map = new mapboxgl.Map({
   container: "map",
   style: "mapbox://styles/mapbox/light-v10",
   center: [2.3364, 48.86091],
   zoom: 16,
 });
+
 var marker1 = new mapboxgl.Marker({ color: "black", width: "80px" })
   .setLngLat([2.3364, 48.86091])
   .addTo(map);
@@ -24,4 +26,5 @@ var marker5 = new mapboxgl.Marker({ color: "grey" })
 const nav = new mapboxgl.NavigationControl({
   visualizePitch: true,
 });
+
 map.addControl(nav, "top-right");

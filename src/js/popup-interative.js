@@ -4,7 +4,6 @@ const ticketBtn = document.querySelector(".buyBtn");
 const select = document.querySelector("#popup-select");
 const popup = document.querySelector(".popup");
 const basicTicketsInput = document.querySelector(".basic-tickets-amount-popup");
-let ticketTypeCost = 20;
 const seniorTicketsInput = document.querySelector(
   ".senior-tickets-amount-popup",
 );
@@ -15,9 +14,12 @@ const popupInputButtons = document
   .querySelector(".popup-amount")
   .querySelectorAll("button");
 
+let ticketTypeCost = 20;
+
 popupButtons.forEach((item) =>
   item.addEventListener("click", (e) => e.preventDefault()),
 );
+
 popupInputButtons.forEach((item) =>
   item.addEventListener("click", () => {
     sessionStorage.setItem(
@@ -107,8 +109,6 @@ popup.addEventListener("transitionstart", (e) => {
   }
 });
 
-// inputs date and time
-
 const dateInput = document.querySelector(".input-date");
 const timeInput = document.querySelector(".input-time");
 const dateInfo = document.querySelector(".info-date");
@@ -138,6 +138,7 @@ const days = {
 };
 
 const today = new Date();
+
 dateInput.setAttribute(
   "min",
   `${today.getFullYear()}-${today.getMonth() + 1}-${
@@ -150,7 +151,6 @@ dateInput.addEventListener("change", () => {
   let month = date.getMonth();
   let dayName = date.getDay();
   let day = date.getDate();
-  // prettier-ignore
   dateInfo.textContent = `${days[dayName]}, ${months[month]} ${day}`;
 });
 

@@ -10,6 +10,7 @@ let ticketTypeCost = 20;
 labelList.forEach((item) =>
   item.addEventListener("click", function (e) {
     if (e.target.tagName != "LABEL") return;
+
     if (e.target.classList.contains("active")) {
       return;
     } else {
@@ -69,12 +70,16 @@ function checksessionStorage() {
   basicTicketsInputValue = sessionStorage.getItem("basicTicketsInputValue");
   seniorTicketsInputValue = sessionStorage.getItem("seniorTicketsInputValue");
   ticketTypeValue = sessionStorage.getItem("ticketType");
+
   if (basicTicketsInputValue) basicTicketsInput.value = basicTicketsInputValue;
+
   if (seniorTicketsInputValue)
     seniorTicketsInput.value = seniorTicketsInputValue;
+
   if (ticketTypeValue) {
     labelList.forEach((item) => {
       item.classList.remove("active");
+
       if (item.classList.contains(sessionStorage.getItem("ticketType")))
         item.classList.add("active");
     });

@@ -1,7 +1,6 @@
-// name input
 const nameInput = document.querySelector(".input-name");
 const nameValidationInfo = document.querySelector(
-  ".input-name-validation-info"
+  ".input-name-validation-info",
 );
 
 function validateName() {
@@ -36,10 +35,9 @@ function validateName() {
 
 nameInput.addEventListener("input", validateName);
 
-// e-mail input
 const emailInput = document.querySelector('input[type="email"]');
 const emailValidationInfo = document.querySelector(
-  ".input-email-validation-info"
+  ".input-email-validation-info",
 );
 
 function validateEmail() {
@@ -49,6 +47,7 @@ function validateEmail() {
       usernameMatch = usernameMatch.replace("@", "");
       let usernameLength = usernameMatch.length;
       let fullUsernameLength = emailInput.value.match(/.+?@/i)[0].length;
+
       if (usernameLength < 3 || usernameLength > 15) {
         emailValidationInfo.textContent =
           "The email name must contain from 3 to 15 characters";
@@ -98,10 +97,9 @@ function validateEmail() {
 
 emailInput.addEventListener("input", validateEmail);
 
-// phone input
 const phoneInput = document.querySelector("input[type='tel']");
 const phoneValidationInput = document.querySelector(
-  ".input-phone-validation-info"
+  ".input-phone-validation-info",
 );
 
 function validatePhone() {
@@ -117,6 +115,7 @@ function validatePhone() {
         return;
       } else {
         phoneValidationInput.textContent = "";
+
         if (++count > 10) {
           phoneValidationInput.textContent =
             "You can enter no more then 10 digits";
@@ -131,8 +130,6 @@ function validatePhone() {
 }
 
 phoneInput.addEventListener("input", validatePhone);
-
-// highlight border
 
 function highlightBorder() {
   this.style.border = "1px solid red";

@@ -10,7 +10,7 @@ function randomPictures() {
 
   function shuffle(array) {
     for (let i = array.length - 1; i > 0; i--) {
-      let j = Math.floor(Math.random() * (i + 1)); // случайный индекс от 0 до i
+      let j = Math.floor(Math.random() * (i + 1));
       [array[i], array[j]] = [array[j], array[i]];
     }
   }
@@ -22,7 +22,6 @@ function randomPictures() {
     img.classList.add("gallery-img");
     img.src = `assets/img/gallery/gallery${arr[i]}.jpg`;
     img.alt = `gallery${arr[i]}`;
-    // pictureInnerContainer.append(img);
 
     if (i < 5) {
       column1.append(img);

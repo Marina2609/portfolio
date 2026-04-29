@@ -14,7 +14,6 @@ window.addEventListener("DOMContentLoaded", () => {
     "Saturday",
   ];
   const dayName = daysOfWeek[dayIndex];
-
   const monthIndex = now.getMonth(); // 0 (январь) – 11 (декабрь)
   const months = [
     "January",
@@ -31,7 +30,6 @@ window.addEventListener("DOMContentLoaded", () => {
     "December",
   ];
   const monthName = months[monthIndex];
-
   const day = now.getDate();
   const hours = now.getHours();
   const minutes = now.getMinutes();

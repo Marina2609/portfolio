@@ -1,10 +1,4 @@
-/* Общий стиль */
 .slider {
-  // position: relative;
-  // width: 600px; /* или любой размер */
-  // overflow: hidden;
-  // margin: 0 auto;
-
   max-width: 1000px;
   min-width: 320px;
   height: 810px;
@@ -15,6 +9,7 @@
   @media (max-width: 1024px) {
     height: 585px;
   }
+
   @media (max-width: 900px) {
     height: 646px;
   }
@@ -30,6 +25,7 @@
   @media (max-width: 527px) {
     height: 450px;
   }
+
   @media (max-width: 464px) {
     height: 385px;
   }
@@ -52,7 +48,6 @@
     z-index: 1;
 
     @media (max-width: 1024px) {
-      // right: initial;
       justify-content: end;
       padding: 0 190px 0 0;
       height: 120px;
@@ -60,7 +55,6 @@
     }
 
     @media (max-width: 900px) {
-      // right: initial;
       padding: 0 75px 0 0;
       justify-content: center;
       height: 124px;
@@ -99,27 +93,21 @@
   display: none;
 }
 
-/* Сам слайд */
 .slides {
   display: flex;
   transition: opacity 1s ease-in;
 
   width: 1000px;
-  // height: 750px;
   overflow: hidden;
-  // right: -320px;
-  // position: absolute;
 }
 
 .slide {
-  position: absolute; /* Чтобы накладывать друг на друга */
+  position: absolute;
   top: 0;
   right: 0;
-  // width: 100%;
-  opacity: 0; /* по умолчанию скрыты */
-  // transition: opacity 0.5s ease;
+  opacity: 0;
   transition: opacity 1s ease-in-out;
-  pointer-events: none; /* чтобы не мешать кликам */
+  pointer-events: none;
   height: 100%;
 
   @media (max-width: 1024px) {
@@ -136,14 +124,12 @@
 }
 
 .slide.active {
-  opacity: 1; /* активный показывать */
+  opacity: 1;
   pointer-events: auto;
 }
 
 .slide img {
-  max-width: 100%; /* Максимальная ширина равна ширине контейнера */
-  // height: auto; /* Высота подстраивается пропорционально */
-  // height: stretch;
+  max-width: 100%;
   max-height: 100%;
   object-fit: cover;
 
@@ -152,7 +138,6 @@
   }
 }
 
-/* Стрелки */
 .arrow-prev,
 .arrow-next {
   position: absolute;
@@ -195,6 +180,7 @@
     margin: 20px 13px 0 22px;
   }
 }
+
 .arrow-next {
   right: 75px;
   background: url("../assets/img/welcome-slider/right.svg") right center
@@ -206,7 +192,6 @@
   }
 }
 
-/* Точки */
 .dots {
   text-align: center;
   margin: 4px 0 0 42px;
@@ -223,6 +208,7 @@
     margin: -4px 0 0 17px;
   }
 }
+
 .dot {
   width: 16px;
   height: 16px;
@@ -251,7 +237,6 @@
   background: $ligthGold;
 }
 
-/* Страница */
 .slide-number {
   font-family: $roboto;
   font-weight: 400;
@@ -345,9 +330,8 @@
   }
 }
 
-/* Стиль активной точки */
 .slick-dots li.slick-active button {
-  background-color: #333; /* или любой другой цвет для активной */
+  background-color: #333;
 }
 
 .slick-dots li button::before {
@@ -355,9 +339,9 @@
 }
 
 .slick-dots {
-  margin: 10px 0; /* только если нужно отступ */
-  display: flex; /* или inline-flex для горизонтальной */
-  justify-content: center; /* по желанию, по центру */
+  margin: 10px 0;
+  display: flex;
+  justify-content: center;
   bottom: auto;
 }
 
@@ -376,8 +360,8 @@
 .slick-dots li button {
   width: 12px;
   height: 12px;
-  border-radius: 50%; /* делаем круглый */
-  background-color: #999999; /* цвет неактивной точки */
+  border-radius: 50%;
+  background-color: #999999;
 
   padding: 0;
 
@@ -398,6 +382,7 @@
   cursor: pointer;
   background-color: #710707;
 }
+
 .slick-dots li.slick-active button:hover {
   cursor: pointer;
   background-color: #710707;

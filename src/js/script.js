@@ -1,15 +1,16 @@
-// explore-slider
 window.addEventListener("DOMContentLoaded", function () {
   var mousedown = "mousedown",
     mousemove = "mousemove",
     mouseup = "mouseup";
   var touch = !!("ontouchstart" in window);
+
   if (touch)
     ((mousedown = "touchstart"),
       (mousemove = "touchmove"),
       (mouseup = "touchend"));
   [].forEach.call(
     document.querySelectorAll(".explore-slider-container"),
+
     function (container) {
       var bottom = container.querySelector(".slider-bottom"),
         bar = container.querySelector(".slider-bar"),

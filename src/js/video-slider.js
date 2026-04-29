@@ -44,6 +44,7 @@ mute.addEventListener("click", (e) => muting());
 
 volume.addEventListener("input", function (e) {
   currentVideo.volume = e.currentTarget.value / 100;
+
   if (currentVideo.volume === 0) {
     mute.style.backgroundImage =
       "url(../assets/svg/video_icon/sound-cancel.svg)";
@@ -54,6 +55,7 @@ volume.addEventListener("input", function (e) {
 
 soundBar.oninput = function () {
   var value = ((this.value - this.min) / (this.max - this.min)) * 100;
+
   this.style.background =
     "linear-gradient(to right, #710707 0%, #710707 0%" +
     value +
@@ -66,6 +68,7 @@ progressBar.addEventListener("input", function (e) {
   var x = currentVideo.duration / this.max;
   var y = this.value;
   var percentage = x * y;
+
   currentVideo.currentTime = percentage;
 });
 
@@ -73,6 +76,7 @@ currentVideo.addEventListener("timeupdate", () => {
   if (isNaN(currentVideo.duration)) return;
 
   var percentage = (currentVideo.currentTime / currentVideo.duration) * 100;
+
   progressBar.style.background =
     "linear-gradient(to right, #710707 0%, #710707 0%" +
     percentage +
@@ -221,7 +225,7 @@ $(document).ready(function () {
     infinite: true,
     slidesToShow: 3,
     slidesToScroll: 1,
-    variableWidth: true, // На десктопе берет 452px из CSS
+    variableWidth: true,
     centerMode: false,
     dots: true,
     appendDots: ".video-dots",
@@ -229,9 +233,9 @@ $(document).ready(function () {
     prevArrow: ".video__slider_prev",
     responsive: [
       {
-        breakpoint: 1480, // Планшеты и ниже
+        breakpoint: 1480,
         settings: {
-          variableWidth: false, // Отключаем фикс. ширину
+          variableWidth: false,
         },
       },
       {
@@ -249,11 +253,12 @@ const dotsContainer = document.querySelector(".video-dots");
 
 let currentIndex = 0;
 
-// Создаем точки навигации
 function createDots(count) {
   dotsContainer.innerHTML = "";
+
   for (let i = 0; i < count; i++) {
     const li = document.createElement("li");
+
     if (i === 0) li.classList.add("slick-active");
     const btn = document.createElement("button");
     btn.addEventListener("click", () => {
@@ -264,7 +269,6 @@ function createDots(count) {
   }
 }
 
-// Обновление активной точки
 function updateDots(index) {
   const dots = document.querySelectorAll(".video-dots li");
   dots.forEach((dot, i) => {
@@ -272,10 +276,9 @@ function updateDots(index) {
   });
 }
 
-// Установка слайда
 function setSlide(index) {
   currentIndex = index;
-  // Загружаем локальное видео
+
   const posterImage = videos[index].poster;
   const srcVideo = videos[index].src;
   mainVideoContainer.poster = posterImage;
@@ -290,23 +293,21 @@ function setSlide(index) {
   updateDots(index);
 }
 
-// Обработчики миниатюр
 document.querySelectorAll(".thumbnail").forEach((thumb, idx) => {
   thumb.addEventListener("click", () => {
     setSlide(parseInt(thumb.getAttribute("data-index")));
   });
 });
 
-// Навигация стрелками
 document.querySelector(".video__slider_next").addEventListener("click", () => {
   let newIndex = (currentIndex + 1) % videos.length;
   setSlide(newIndex);
 });
+
 document.querySelector(".video__slider_prev").addEventListener("click", () => {
   let newIndex = (currentIndex - 1 + videos.length) % videos.length;
   setSlide(newIndex);
 });
 
-// Инициализация
 createDots(videos.length);
 setSlide(0);
