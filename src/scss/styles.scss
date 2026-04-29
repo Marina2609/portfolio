@@ -1,0 +1,58 @@
+$forum: "Forum", cursive;
+$roboto: "Roboto", sans-serif;
+$dark: #030303;
+$red: #710707;
+$gold: #9d8665;
+$ligthGold: #d2b183;
+$black: #000000;
+$white: #fff;
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  text-decoration: none;
+
+  button {
+    background: transparent;
+    border: none;
+  }
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  font-family: $roboto;
+  font-weight: 300;
+}
+
+main {
+  flex: 1 1 0%;
+}
+
+.wrapper {
+  max-width: 1480px;
+  margin: 0px auto;
+  padding: 0 20px;
+  overflow: hidden;
+
+  // @media (max-width: 1500px) {
+  //   max-width: 1200px;
+  // }
+}
+
+.mapboxgl-ctrl-attrib-inner {
+  display: flex;
+}
+
+.mapboxgl-ctrl-attrib a {
+  font-size: 10px !important;
+  margin-bottom: 0 !important;
+}
+
+.mapboxgl-ctrl,
+.mapboxgl-ctrl-logo {
+  margin: 0 !important;
+}

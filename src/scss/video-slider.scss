@@ -1,0 +1,38 @@
+.thumbnails .thumbnail {
+  outline: none;
+  margin: 0 21px;
+  width: 100%;
+
+  @media (min-width: 1025px) {
+    max-width: 452px !important;
+    height: 254px !important;
+  }
+
+  @media (max-width: 1024px) {
+    max-width: 300px !important;
+    height: 170px !important;
+  }
+
+  @media (max-width: 768px) {
+    max-width: 354px !important;
+    height: 199px !important;
+    margin: 0 10px;
+  }
+
+  @media (max-width: 420px) {
+    max-width: 180px !important;
+    height: 101px !important;
+  }
+}
+
+.thumbnail-video {
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+  border: none;
+
+  @media (max-width: 452px) {
+    aspect-ratio: 16 / 9;
+    display: block;
+  }
+}
