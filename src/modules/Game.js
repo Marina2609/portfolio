@@ -148,13 +148,70 @@ export class BlitzGame {
     this.currentQuestion = null;
     this.isStatementCorrect = false;
     this.currentAudio = null;
+
+    // Загружаем сохраненный пул ошибок Блица из localStorage [INDEX]
+    try {
+      this.wrongPool =
+        JSON.parse(localStorage.getItem("blitz_wrong_questions_pool")) || [];
+    } catch (e) {
+      this.wrongPool = [];
+    }
+
+    // Флаг, указывающий, пришел ли текущий вопрос из пула ошибок
+    this.isFromWrongPool = false;
+    this.isSuperGame = false;
+    this.wrongPoolIndex = -1;
   }
 
-  // Внутри класса BlitzGame в Game.js замените этот метод:
   generateQuestion() {
     this.stopAudio();
-    const pool = Math.random() > 0.5 ? "audio" : "images";
     this.isStatementCorrect = Math.random() > 0.5;
+
+    // ЕСЛИ ИДЕТ СУПЕР-ИГРА: берем вопросы строго из пула ошибок раунда [INDEX]
+    if (this.isSuperGame && this.wrongPool.length > 0) {
+      this.wrongPoolIndex = 0; // Идем по порядку ошибок
+      const savedWrong = this.wrongPool[this.wrongPoolIndex];
+
+      if (savedWrong.type === "audio") {
+        let displayedName = savedWrong.correctData.name;
+        if (!this.isStatementCorrect) {
+          let wrongTrack;
+          do {
+            wrongTrack =
+              audioData[Math.floor(Math.random() * audioData.length)];
+          } while (wrongTrack.name === savedWrong.correctData.name);
+          displayedName = wrongTrack.name;
+        }
+        this.currentQuestion = {
+          type: "audio",
+          audioNum: savedWrong.correctData.audioNum,
+          text: `СУПЕР-ИГРА! \nЭтот музыкальный фрагмент — \n«${savedWrong.correctData.category} — \n${displayedName}»?`,
+          correctData: savedWrong.correctData,
+        };
+      } else {
+        let displayedAuthor = savedWrong.correctData.author;
+        if (!this.isStatementCorrect) {
+          let wrongImg;
+          do {
+            wrongImg =
+              imagesData[Math.floor(Math.random() * imagesData.length)];
+          } while (wrongImg.author === savedWrong.correctData.author);
+          displayedAuthor = wrongImg.author;
+        }
+        this.currentQuestion = {
+          type: "images",
+          imageNum: savedWrong.correctData.imageNum,
+          text: `СУПЕР-ИГРА! \nНа портрете изображен композитор \n${displayedAuthor}?`,
+          correctData: savedWrong.correctData,
+        };
+      }
+      return this.currentQuestion;
+    }
+
+    // Если пула ошибок нет — стандартная случайная генерация из общей базы данных
+    this.isFromWrongPool = false;
+
+    const pool = Math.random() > 0.5 ? "audio" : "images";
 
     if (pool === "audio") {
       const randomTrack =
@@ -175,7 +232,7 @@ export class BlitzGame {
       this.currentQuestion = {
         type: "audio",
         audioNum: randomTrack.audioNum,
-        text: `Этот музыкальный фрагмент — «${displayedStatement}»?`,
+        text: `Этот музыкальный фрагмент — \n«${displayedStatement}»?`,
         correctData: randomTrack,
       };
     } else {
@@ -194,7 +251,7 @@ export class BlitzGame {
       this.currentQuestion = {
         type: "images",
         imageNum: randomImg.imageNum,
-        text: `На портрете изображен композитор ${displayedAuthor}?`,
+        text: `На портрете изображен композитор \n${displayedAuthor}?`,
         correctData: randomImg,
       };
     }
@@ -223,13 +280,49 @@ export class BlitzGame {
 
   checkAnswer(userChoice) {
     const isCorrect = userChoice === this.isStatementCorrect;
-    this.numberQuestion++;
 
     if (isCorrect) {
+      this.numberQuestion++;
       this.score++;
-      this.timeLeft += 3;
-    }
 
+      if (!this.isSuperGame) {
+        this.timeLeft += 3; // Бонус времени только в основном режиме [INDEX]
+      } else {
+        // В Супер-игре при правильном ответе удаляем вопрос из пула ошибок [INDEX]
+        this.wrongPool.splice(this.wrongPoolIndex, 1);
+      }
+    } else {
+      // Если ответ неверный и это обычный блиц — сохраняем вопрос в пул ошибок [INDEX]
+      if (!this.isSuperGame) {
+        this.numberQuestion++;
+        const isDuplicate = this.wrongPool.some((item) => {
+          if (this.currentQuestion.type === "audio") {
+            return (
+              item.type === "audio" &&
+              item.correctData.audioNum ===
+                this.currentQuestion.correctData.audioNum
+            );
+          } else {
+            return (
+              item.type === "images" &&
+              item.correctData.imageNum ===
+                this.currentQuestion.correctData.imageNum
+            );
+          }
+        });
+
+        if (!isDuplicate) {
+          this.wrongPool.push({
+            type: this.currentQuestion.type,
+            correctData: this.currentQuestion.correctData,
+          });
+        }
+      } else {
+        // Если ошибся в Супер-игре, вопрос перемещается в конец очереди, чтобы спросить позже [INDEX]
+        const missed = this.wrongPool.splice(this.wrongPoolIndex, 1)[0];
+        this.wrongPool.push(missed);
+      }
+    }
     return isCorrect;
   }
 

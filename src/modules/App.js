@@ -149,20 +149,65 @@ export default class App {
   }
 
   handleBlitzAnswer(userChoice) {
+    if (!this.blitzGame) return; // Защита от кликов, если игра уже завершена
+
     this.blitzGame.stopAudio();
+
     const isCorrect = this.blitzGame.checkAnswer(userChoice);
     this.playSound(isCorrect ? "correct" : "wrong");
+
+    // Если пройдена Супер-игра и исправлены все ошибки
+    if (this.blitzGame.isSuperGame && this.blitzGame.wrongPool.length === 0) {
+      // Удаляем старое окно, если оно зависло
+      const blitzModal = document.querySelector(".blitz-end-overlay");
+      if (blitzModal) blitzModal.remove();
+
+      // Выводим финальный красивый кубок (totalQuestions ставим 0, чтобы сработал Блиц-финал) [INDEX]
+      this.view.renderEndRoundModal(
+        this.blitzGame.wrongPool,
+        this.blitzGame.score,
+        this.blitzGame.numberQuestion,
+        0,
+      );
+      this.blitzGame = null;
+      return;
+    }
+
+    // Если ошибки еще остались, просто показываем следующий ошибочный вопрос [INDEX]
     this.showNextBlitzQuestion();
   }
 
+  //При таймауте выводим окно результатов и передаем флаг наличия ошибок
   handleBlitzTimeOut() {
+    if (!this.blitzGame) return;
+    // Останавливаем таймер и музыку
+    this.blitzGame.stopTimer();
+    this.blitzGame.stopAudio();
+
+    // Сохраняем набранные очки в общую статистику Блица
     this.settings.saveBlitzResult(this.blitzGame.score);
-    this.view.renderEndRoundModal(
+
+    // Проверяем: были ли ошибки в этом раунде
+    const hasErrors = this.blitzGame.wrongPool.length > 0;
+
+    // передаем набранный счет и флаг наличия ошибок [INDEX]
+    this.view.renderBlitzEndModal(
       this.blitzGame.score,
       this.blitzGame.numberQuestion,
-      0,
-      true,
+      hasErrors,
     );
+  }
+
+  // Активация Супер-игры по нажатию на кнопку в модальном окне [INDEX]
+  activateSuperGame() {
+    if (!this.blitzGame) return;
+    this.blitzGame.numberQuestion =
+      this.blitzGame.numberQuestion - this.blitzGame.wrongPool.length;
+
+    document.querySelector(".end-round-overlay").remove(); // Закрываем модалку
+    this.blitzGame.isSuperGame = true; // Включаем режим супер-игры
+    this.view.updateTimer(0); // Фиксируем таймер
+    this.showNextBlitzQuestion(); // Показываем первый ошибочный вопрос
   }
 
   playSound(resultName) {
@@ -423,6 +468,34 @@ export default class App {
       }
       if (e.target.id === "time-switch")
         this.settings.save({ timeGame: e.target.checked });
+
+      // 10. Клик по кнопке "Хочешь сыграть в Супер-игру?"
+      if (e.target.classList.contains("start-super-blitz-btn")) {
+        // Удаляем окно окончания раунда Блица
+        const blitzModal = document.querySelector(".blitz-end-overlay");
+        if (blitzModal) blitzModal.remove();
+
+        if (this.blitzGame) {
+          // Переключаем игру в фазу Супер-игры [INDEX]
+          this.blitzGame.isSuperGame = true;
+          // Загружаем первый вопрос из пула ошибок и убираем таймер во View [INDEX]
+          this.showNextBlitzQuestion();
+        }
+        return;
+      }
+
+      // 11. Клик по кнопке "В главное меню Блица" (срабатывает и для кнопки завершения супер-игры)
+      if (e.target.classList.contains("back-to-blitz-menu-btn")) {
+        const blitzModal = document.querySelector(".blitz-end-overlay");
+        if (blitzModal) blitzModal.remove();
+
+        const endRoundModal = document.querySelector(".end-round-overlay");
+        if (endRoundModal) endRoundModal.remove();
+
+        this.blitzGame = null; // Сбрасываем игру
+        this.view.renderBlitzMenu(this.settings.blitz); // Возврат в меню Блица
+        return;
+      }
     });
 
     document.addEventListener("input", (e) => {

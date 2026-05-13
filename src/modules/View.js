@@ -114,7 +114,7 @@ export default class View {
     this.app.append(container);
   }
 
-  // 3. Экран вопроса (ИСПРАВЛЕНО: Таймер выведен на строку ВЫШЕ, чем номер текущего вопроса)
+  // 3. Экран вопроса
   renderQuestion(questionData, variants, currentStep, type, answers = []) {
     this.app.innerHTML = "";
     const container = this.createElement("div", "question-screen fade-in");
@@ -457,7 +457,7 @@ export default class View {
   }
 
   // 9. Финальное окно окончания раунда
-  renderEndRoundModal(score, numberQuestion, totalQuestions) {
+  renderEndRoundModal(wrongPool, score, numberQuestion, totalQuestions) {
     const overlay = this.createElement(
       "div",
       "modal-overlay active end-round-overlay",
@@ -467,8 +467,8 @@ export default class View {
     overlay.innerHTML = `
             <div class="modal-content end-round-content fade-in">
                 <div class="end-round-icon">🏆</div>
-                <h2 class="end-round-title">${isBlitz ? "Время вышло!" : "Раунд завершен!"}</h2>
-                <p class="end-round-result">Ваш результат: <span class="highlight-score">${score}</span> ${isBlitz ? `очков из <span class="highlight-numberQuestion">${numberQuestion}</span>` : `из ${totalQuestions}`}</p>
+                <h2 class="end-round-title">${isBlitz ? "Раунд завершен!" : wrongPool.length === 0 ? "Раунд завершен!" : "Время вышло!"}</h2>
+                <p class="end-round-result">Ваш результат: <span class="highlight-score">${score}</span> ${isBlitz ? `очков из <span class="highlight-numberQuestion">${numberQuestion - 1}</span>` : `из ${totalQuestions}`}</p>
                 <button class="end-round-btn ${isBlitz ? "back-to-blitz-menu-btn" : "continue-btn"}">Продолжить</button>
             </div>
         `;
@@ -522,5 +522,32 @@ export default class View {
             <button class="save-settings-btn back-btn">Сохранить</button>
         `;
     this.app.append(container);
+  }
+
+  // 12. Интерактивное модальное окно окончания Блиц-раунда [INDEX]
+  renderBlitzEndModal(score, numberQuestion, hasErrors = false) {
+    const overlay = this.createElement(
+      "div",
+      "modal-overlay active blitz-end-overlay",
+    );
+
+    // Кнопка Супер-игры генерируется только при наличии неисправленных ошибок раунда [INDEX]
+    const superGameButtonHTML = hasErrors
+      ? `<button class="menu-btn start-super-blitz-btn" style="background-color: #ff9800 !important;">Хочешь сыграть в Супер-игру?</button>`
+      : `<p style="color: #4caf50; font-weight: bold; margin-bottom: 10px;">✨ Идеальный раунд без ошибок! ✨</p>`;
+
+    overlay.innerHTML = `
+            <div class="modal-content end-round-content fade-in">
+                <div class="end-round-icon">⏱️</div>
+                <h2 class="end-round-title">Время вышло!</h2>
+                <p class="end-round-result" style="margin-bottom: 20px;">Ваш результат: <span class="highlight-score">${score}</span> очков из <span class="highlight-numberQuestion">${numberQuestion - 1}</span></p>
+                
+                <div class="modal-buttons">
+                    ${superGameButtonHTML}
+                    <button class="menu-btn back-to-blitz-menu-btn">В главное меню игры</button>
+                </div>
+            </div>
+        `;
+    document.body.append(overlay);
   }
 }
