@@ -229,7 +229,7 @@ export default class View {
   }
 
   // 4. Экран Блиц-Вопроса
-  renderBlitzQuestion(questionData, score, timeLeft) {
+  renderBlitzQuestion(questionData, score, numberQuestion, timeLeft) {
     this.app.innerHTML = "";
     const container = this.createElement(
       "div",
@@ -244,6 +244,7 @@ export default class View {
     container.innerHTML = `
             <div class="question-header">
                 <div class="blitz-score-info">Счет: <strong>${score}</strong></div>
+                <div class="blitz-question-info">Вопрос: <strong>${numberQuestion}</strong></div>
                 <div class="timer-text ${timeLeft <= 10 ? "warning" : ""}">${m}:${s}</div>
             </div>
             <h3 class="question-title">${questionData.text}</h3>
@@ -456,7 +457,7 @@ export default class View {
   }
 
   // 9. Финальное окно окончания раунда
-  renderEndRoundModal(score, totalQuestions) {
+  renderEndRoundModal(score, numberQuestion, totalQuestions) {
     const overlay = this.createElement(
       "div",
       "modal-overlay active end-round-overlay",
@@ -467,7 +468,7 @@ export default class View {
             <div class="modal-content end-round-content fade-in">
                 <div class="end-round-icon">🏆</div>
                 <h2 class="end-round-title">${isBlitz ? "Время вышло!" : "Раунд завершен!"}</h2>
-                <p class="end-round-result">Ваш результат: <span class="highlight-score">${score}</span> ${isBlitz ? "очков" : `из ${totalQuestions}`}</p>
+                <p class="end-round-result">Ваш результат: <span class="highlight-score">${score}</span> ${isBlitz ? `очков из <span class="highlight-numberQuestion">${numberQuestion}</span>` : `из ${totalQuestions}`}</p>
                 <button class="end-round-btn ${isBlitz ? "back-to-blitz-menu-btn" : "continue-btn"}">Продолжить</button>
             </div>
         `;

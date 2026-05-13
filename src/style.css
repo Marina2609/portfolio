@@ -438,6 +438,12 @@ button:hover {
   font-size: 1.6rem;
 }
 
+.highlight-numberQuestion {
+  font-weight: bold;
+  color: #8d5d99; /* Зеленый цвет для очков */
+  font-size: 1.6rem;
+}
+
 .end-round-btn {
   background-color: #610e00;
   color: white;

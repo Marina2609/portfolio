@@ -110,6 +110,7 @@ export default class App {
       this.currentGame.type,
       this.currentGame.categoryIndex,
       this.currentGame.score,
+      this.currentGame.numberQuestion,
       this.currentGame.answers,
     );
 
@@ -142,6 +143,7 @@ export default class App {
     this.view.renderBlitzQuestion(
       questionData,
       this.blitzGame.score,
+      this.blitzGame.numberQuestion,
       this.blitzGame.timeLeft,
     );
     this.blitzGame.playAudio(this.settings.config.volume);
@@ -156,7 +158,12 @@ export default class App {
 
   handleBlitzTimeOut() {
     this.settings.saveBlitzResult(this.blitzGame.score);
-    this.view.renderEndRoundModal(this.blitzGame.score, 0, true);
+    this.view.renderEndRoundModal(
+      this.blitzGame.score,
+      this.blitzGame.numberQuestion,
+      0,
+      true,
+    );
   }
 
   playSound(resultName) {
@@ -234,6 +241,7 @@ export default class App {
               this.currentGame.type,
               this.currentGame.categoryIndex,
               this.currentGame.score,
+              this.currentGame.numberQuestion,
               this.currentGame.answers,
             );
           }
@@ -326,6 +334,7 @@ export default class App {
           this.currentGame.type,
           this.currentGame.categoryIndex,
           this.currentGame.score,
+          this.currentGame.numberQuestion,
           this.currentGame.answers,
         );
 
@@ -348,7 +357,11 @@ export default class App {
           if (this.currentGame.type === "audio") itemsCount = 15;
           if (this.currentGame.type === "images") itemsCount = 5;
 
-          this.view.renderEndRoundModal(this.currentGame.score, itemsCount);
+          this.view.renderEndRoundModal(
+            this.currentGame.score,
+            this.currentGame.numberQuestion,
+            itemsCount,
+          );
         }
       }
 
@@ -379,6 +392,7 @@ export default class App {
             this.currentGame.type,
             this.currentGame.categoryIndex,
             this.currentGame.score,
+            this.currentGame.numberQuestion,
             this.currentGame.answers,
           );
 
@@ -395,6 +409,7 @@ export default class App {
         if (this.blitzGame) {
           this.blitzGame.stopTimer();
           this.settings.saveBlitzResult(this.blitzGame.score);
+
           this.blitzGame = null;
           this.view.renderBlitzMenu(this.settings.blitz);
           return;

@@ -8,6 +8,7 @@ export class Game {
     this.categoryIndex = categoryIndex;
     this.questionIndex = 0;
     this.score = 0;
+    this.numberQuestion = 1;
     this.answers = [];
     this.currentAudio = null;
     this.questions = this.getQuestions();
@@ -66,12 +67,15 @@ export class Game {
         : String(userAnswer).trim() === String(correctAnswer).trim();
 
     this.answers.push(isCorrect);
+    this.numberQuestion++;
+
     if (isCorrect) this.score++;
 
     return {
       isCorrect,
       correctData: currentQuestion,
       currentScore: this.score,
+      correctNumberQuestion: this.numberQuestion,
     };
   }
 
@@ -139,6 +143,7 @@ export class Game {
 export class BlitzGame {
   constructor() {
     this.score = 0;
+    this.numberQuestion = 1;
     this.timeLeft = 60;
     this.currentQuestion = null;
     this.isStatementCorrect = false;
@@ -218,10 +223,13 @@ export class BlitzGame {
 
   checkAnswer(userChoice) {
     const isCorrect = userChoice === this.isStatementCorrect;
+    this.numberQuestion++;
+
     if (isCorrect) {
       this.score++;
-      this.timeLeft += 4;
+      this.timeLeft += 3;
     }
+
     return isCorrect;
   }
 
