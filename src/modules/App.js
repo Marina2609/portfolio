@@ -421,7 +421,7 @@ export default class App {
         const val = parseInt(e.target.value);
         this.settings.save({ timeStep: val });
         if (document.querySelector(".time-value"))
-          document.querySelector(".time-value").textContent = val;
+          document.querySelector(".time-value").textContent = `${"⏳ "}` + val;
       }
     });
   }
