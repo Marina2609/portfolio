@@ -27,12 +27,12 @@ export default class View {
     container.innerHTML = `
             <h1 class="logo">МУЗЫКАЛЬНЫЙ КВИЗ</h1>
             <div class="menu-buttons">
-                <button id="audio-btn" class="menu-btn">Угадай мелодию</button>
-                <button id="images-btn" class="menu-btn">Композиторы</button>
-                <button id="questions-btn" class="menu-btn">Теория музыки</button>
-                <button id="blitz-menu-btn" class="menu-btn blitz-theme-btn">Режим Блиц</button>
+                <button id="audio-btn" class="menu-btn">🎶 Угадай мелодию</button>
+                <button id="images-btn" class="menu-btn">👤 Композиторы</button>
+                <button id="questions-btn" class="menu-btn">🎼 Теория музыки</button>
+                <button id="blitz-menu-btn" class="menu-btn blitz-theme-btn">⚡️ Режим Блиц</button>
             </div>
-            <button class="settings-btn" id="settings-btn">⚙️ Settings</button>
+            <button class="settings-btn" id="settings-btn">⚙️</button>
         `;
     this.app.append(container);
   }
@@ -41,6 +41,10 @@ export default class View {
   renderCategories(type, results) {
     this.app.innerHTML = "";
     const container = this.createElement("div", "categories-screen fade-in");
+
+    const backBtn = this.createElement("button", "back-btn");
+    backBtn.textContent = "🏠 На главную";
+
     const title = this.createElement("h2", "screen-title");
 
     if (type === "audio") title.textContent = "УГАДАЙ МЕЛОДИЮ";
@@ -53,8 +57,8 @@ export default class View {
     let totalItems = 10;
 
     if (type === "audio") {
-      categoriesCount = 4;
-      totalItems = 11;
+      categoriesCount = 3;
+      totalItems = 15;
     }
     if (type === "images") {
       categoriesCount = 1;
@@ -92,8 +96,8 @@ export default class View {
 
       card.innerHTML = `
                 <div class="category-header">
-                    <span>Category ${i + 1}</span>
-                    ${isPlayed ? `<span class="score-label">${score}/${totalItems}</span>` : ""}
+                    <span class="round">Раунд ${i + 1}</span>
+                    ${isPlayed ? `<span class="score-label"><p>${score}</p>/ ${totalItems}</span>` : ""}
                 </div>
                 <div class="category-image">
                     <img src="./assets/img/${imgIdx}.jpg" class="${isPlayed ? "" : "grayscale"}">
@@ -106,9 +110,7 @@ export default class View {
       grid.append(card);
     }
 
-    const backBtn = this.createElement("button", "back-btn");
-    backBtn.textContent = "Home";
-    container.append(title, grid, backBtn);
+    container.append(backBtn, title, grid);
     this.app.append(container);
   }
 
@@ -136,13 +138,13 @@ export default class View {
 
     header.innerHTML = `
             <div class="timer-text" style="font-weight: bold; font-size: 1.2rem;">${type === "questions" ? "" : "00:00"}</div>
-            <div class="progress-info" style="color: #666; font-size: 0.95rem;">${currentStep + 1} / ${type === "audio" ? 11 : type === "images" ? 5 : 10}</div>
+            <div class="progress-info" style="color: #666; font-size: 0.95rem;">${currentStep + 1} / ${type === "audio" ? 15 : type === "images" ? 5 : 10}</div>
         `;
     container.append(header);
 
     // Блок точек-индикаторов рендерится строго ПОД номером вопроса
     let totalSteps = 10;
-    if (type === "audio") totalSteps = 11;
+    if (type === "audio") totalSteps = 15;
     if (type === "images") totalSteps = 5;
 
     const bulletContainer = this.createElement("div", "bullet-container");
@@ -282,7 +284,7 @@ export default class View {
                 <p>Лучший рекорд: <strong>${stats.highScore} очков</strong></p>
             </div>
             <button id="start-blitz-btn" class="menu-btn" style="margin: 20px auto; display: block; max-width: 320px;">Старт (1 минута)</button>
-            <button class="back-btn">Home</button>
+            <button class="back-btn">🏠 На главную</button>
         `;
     this.app.append(container);
   }
@@ -298,11 +300,24 @@ export default class View {
     this.app.innerHTML = "";
     const container = this.createElement("div", "results-screen fade-in");
 
+    const btnContainer = this.createElement("div", "results-buttons-wrap");
+
+    const backBtn = this.createElement("button", "back-to-categories-btn");
+    backBtn.textContent = "Назад";
+    backBtn.dataset.type = type;
+
+    const retryBtn = this.createElement("button", "retry-btn");
+    retryBtn.textContent = "Изучить снова";
+    retryBtn.dataset.id = categoryIndex;
+    retryBtn.dataset.type = type;
+
+    btnContainer.append(backBtn, retryBtn);
+
     const title = this.createElement("h2", "screen-title");
     title.textContent = "РЕЗУЛЬТАТЫ";
 
     let totalItems = 10;
-    if (type === "audio") totalItems = 11;
+    if (type === "audio") totalItems = 15;
     if (type === "images") totalItems = 5;
 
     const scoreInfo = this.createElement("p", "results-score-info");
@@ -339,7 +354,7 @@ export default class View {
         card.style.borderRadius = "6px";
         card.style.cursor = "pointer";
         card.style.textAlign = "left";
-        card.style.width = "100%";
+        // card.style.width = "100%";
       } else {
         if (!isCorrect) card.classList.add("grayscale");
       }
@@ -367,19 +382,7 @@ export default class View {
       grid.append(card);
     });
 
-    const btnContainer = this.createElement("div", "results-buttons-wrap");
-
-    const backBtn = this.createElement("button", "back-to-categories-btn");
-    backBtn.textContent = "Назад";
-    backBtn.dataset.type = type;
-
-    const retryBtn = this.createElement("button", "retry-btn");
-    retryBtn.textContent = "Изучить снова";
-    retryBtn.dataset.id = categoryIndex;
-    retryBtn.dataset.type = type;
-
-    btnContainer.append(backBtn, retryBtn);
-    container.append(title, scoreInfo, grid, btnContainer);
+    container.append(btnContainer, title, scoreInfo, grid);
     this.app.append(container);
   }
 
@@ -441,11 +444,11 @@ export default class View {
 
     overlay.innerHTML = `
             <div class="modal-content fade-in">
-                <div class="icon ${isCorrect ? "correct" : "wrong"}"></div>
+                <div class="icon ${isCorrect ? "correct" : "wrong"}">${isCorrect ? "&#10003;" : "&#10005;"}</div>
                 ${contentHTML}
                 <div class="modal-buttons">
-                    <button class="quit-btn back-btn">Home</button>
-                    <button class="next-btn">Next</button>
+                    <button class="quit-btn back-btn">🏠 На главную</button>
+                    <button class="next-btn">Следующий</button>
                 </div>
             </div>
         `;
@@ -487,29 +490,34 @@ export default class View {
     this.app.innerHTML = "";
     const container = this.createElement("div", "settings-screen fade-in");
     container.innerHTML = `
-            <h2 class="settings-title">SETTINGS</h2>
-            <div class="settings-card">
-                <div class="icon-volume"></div>
+            <h2 class="settings-title">НАСТРОЙКИ</h2>
+            <div class="settings-wrapper">
+              <div class="settings-card">
+               <p class="label-text">ЗВУК</p>
+                <div class="icon-volume">${config.volume > 0 ? "🔊" : "🔇"}</div>
                 <input type="range" id="volume-range" min="0" max="100" value="${config.volume}">
                 <div class="toggle-group">
                     <input type="checkbox" id="volume-switch" ${config.volume > 0 ? "checked" : ""}>
-                    <label for="volume-switch">ON/OFF</label>
+                    <label for="volume-switch">ВКЛ/ВЫКЛ</label>
                 </div>
-                <p class="label-text">VOLUME</p>
+               
             </div>
             <div class="settings-card">
-                <div class="icon-time"></div>
+            <p class="label-text">ТАЙМЕР</p>
+                <div class="icon-time">⏱️</div>
                 <div class="time-controls">
                     <input type="range" id="time-range" min="5" max="30" step="5" value="${config.timeStep || 10}">
-                    <span class="time-value">${config.timeStep || 10}</span>
+                    <span class="time-value">⏳ ${config.timeStep || 10}</span>
                 </div>
                 <div class="toggle-group">
                     <input type="checkbox" id="time-switch" ${config.timeGame ? "checked" : ""}>
-                    <label for="time-switch">ON/OFF</label>
+                    <label for="time-switch">ВКЛ/ВЫКЛ</label>
                 </div>
-                <p class="label-text">TIME</p>
+                
             </div>
-            <button class="save-settings-btn back-btn">Save</button>
+ </div>
+            
+            <button class="save-settings-btn back-btn">Сохранить</button>
         `;
     this.app.append(container);
   }

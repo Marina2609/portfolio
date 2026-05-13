@@ -15,7 +15,7 @@ export class Game {
 
   getQuestions() {
     let itemsPerCategory = 10;
-    if (this.type === "audio") itemsPerCategory = 11;
+    if (this.type === "audio") itemsPerCategory = 15;
     if (this.type === "images") itemsPerCategory = 5;
     if (this.type === "questions") itemsPerCategory = 10;
 
@@ -80,7 +80,7 @@ export class Game {
     this.questionIndex++;
 
     let totalSteps = 10;
-    if (this.type === "audio") totalSteps = 11;
+    if (this.type === "audio") totalSteps = 15;
     if (this.type === "images") totalSteps = 5;
 
     return this.questionIndex < totalSteps;
@@ -220,7 +220,7 @@ export class BlitzGame {
     const isCorrect = userChoice === this.isStatementCorrect;
     if (isCorrect) {
       this.score++;
-      this.timeLeft += 3;
+      this.timeLeft += 4;
     }
     return isCorrect;
   }

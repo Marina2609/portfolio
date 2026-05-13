@@ -247,7 +247,7 @@ export default class App {
         const type = parentCard ? parentCard.dataset.type : "audio";
 
         let itemsPerCategory = 10;
-        if (type === "audio") itemsPerCategory = 11;
+        if (type === "audio") itemsPerCategory = 15;
         if (type === "images") itemsPerCategory = 5;
 
         const start = categoryIndex * itemsPerCategory;
@@ -277,7 +277,7 @@ export default class App {
           const gameType = retryBtn.dataset.type;
 
           let itemsCount = 10;
-          if (gameType === "audio") itemsCount = 11;
+          if (gameType === "audio") itemsCount = 15;
           if (gameType === "images") itemsCount = 5;
 
           let sourcePool = audioData;
@@ -345,7 +345,7 @@ export default class App {
           this.showNextQuestion();
         } else {
           let itemsCount = 10;
-          if (this.currentGame.type === "audio") itemsCount = 11;
+          if (this.currentGame.type === "audio") itemsCount = 15;
           if (this.currentGame.type === "images") itemsCount = 5;
 
           this.view.renderEndRoundModal(this.currentGame.score, itemsCount);

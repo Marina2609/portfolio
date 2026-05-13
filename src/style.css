@@ -1,14 +1,26 @@
 body {
+  overflow: hidden;
   font-family: sans-serif;
   text-align: center;
-  background: #f0f0f0;
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-image: url("../assets/png/background.png");
+  background-size: cover; /* Растягивает картинку по всей площади окна */
+  background-position: center; /* Центрирует изображение */
+  background-repeat: no-repeat;
 }
 #app {
-  max-width: 500px;
   margin: 50px auto;
+  max-width: 500px;
+  width: 100%;
   background: white;
   padding: 20px;
   border-radius: 15px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
 }
 .categories-grid {
@@ -881,4 +893,80 @@ button:hover {
   padding: 12px 15px;
   font-size: 16px;
   white-space: nowrap; /* Защита от переноса текста на кнопке */
+}
+
+.category-header {
+  display: grid;
+  gap: 10px;
+  margin: 20px 0;
+}
+
+.score-label {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+}
+
+.score-label p {
+  color: rgb(64, 190, 248);
+}
+
+.settings-wrapper {
+  display: flex;
+  justify-content: space-between;
+  margin: 0 0 40px;
+}
+
+/* Контейнер модального окна должен иметь относительное позиционирование */
+.modal-content {
+  position: relative;
+  /* background: #333; Цвет фона окна как на фото */
+  border-radius: 15px;
+  padding: 30px 20px 20px 20px; /* Верхний паддинг больше, чтобы текст не упирался в иконку */
+  /* Ваши остальные стили для окна */
+}
+
+/* Общие стили для круглой иконки */
+.icon {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translate(
+    -50%,
+    -50%
+  ); /* Сдвиг на 50% вверх и влево для идеального центрирования */
+  width: 50px; /* Размер кружка */
+  height: 50px;
+  border-radius: 50%; /* Делает элемент круглым */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 24px;
+  font-weight: bold;
+  border: 3px solid #333; /* Бордюр под цвет фона окна, чтобы визуально отделить круг */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); /* Легкая тень */
+}
+
+/* Вариант для неверного ответа (как на фото) */
+.icon.wrong {
+  background-color: #f44336; /* Красный цвет */
+}
+
+/* Вариант для правильного ответа */
+.icon.correct {
+  background-color: #4caf50; /* Зеленый цвет */
+}
+
+.menu-buttons {
+  padding: 20px 0 90px;
+}
+
+.settings-btn {
+  background: transparent;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  font-size: 22px;
 }

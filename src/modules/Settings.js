@@ -2,7 +2,7 @@ export default class Settings {
   constructor() {
     const defaultConfig = { volume: 50, timeGame: false, timeStep: 20 };
 
-    // Результаты для 3 режимов (в каждом по 12 категорий, если делить по 10 вопросов)
+    // Результаты для 3 режимов
     const defaultResults = {
       audio: Array(12).fill(null),
       images: Array(12).fill(null),
