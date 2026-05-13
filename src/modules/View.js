@@ -507,8 +507,9 @@ export default class View {
                 <div class="icon-time">⏱️</div>
                 <div class="time-controls">
                     <input type="range" id="time-range" min="5" max="30" step="5" value="${config.timeStep || 10}">
-                    <span class="time-value">⏳ ${config.timeStep || 10}</span>
+                   
                 </div>
+                 <span class="time-value">⏳ ${config.timeStep || 10}</span>
                 <div class="toggle-group">
                     <input type="checkbox" id="time-switch" ${config.timeGame ? "checked" : ""}>
                     <label for="time-switch">ВКЛ/ВЫКЛ</label>

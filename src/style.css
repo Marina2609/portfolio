@@ -970,3 +970,7 @@ button:hover {
   left: 0;
   font-size: 22px;
 }
+.time-value {
+  margin: 10px;
+  display: block;
+}
