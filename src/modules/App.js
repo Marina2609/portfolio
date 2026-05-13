@@ -110,7 +110,6 @@ export default class App {
       this.currentGame.type,
       this.currentGame.categoryIndex,
       this.currentGame.score,
-      this.currentGame.numberQuestion,
       this.currentGame.answers,
     );
 
@@ -241,7 +240,6 @@ export default class App {
               this.currentGame.type,
               this.currentGame.categoryIndex,
               this.currentGame.score,
-              this.currentGame.numberQuestion,
               this.currentGame.answers,
             );
           }
@@ -334,7 +332,6 @@ export default class App {
           this.currentGame.type,
           this.currentGame.categoryIndex,
           this.currentGame.score,
-          this.currentGame.numberQuestion,
           this.currentGame.answers,
         );
 
@@ -392,7 +389,6 @@ export default class App {
             this.currentGame.type,
             this.currentGame.categoryIndex,
             this.currentGame.score,
-            this.currentGame.numberQuestion,
             this.currentGame.answers,
           );
 
