@@ -22,6 +22,8 @@ body {
   border-radius: 15px;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  overflow-y: auto;
+  max-height: 75vh;
 }
 .categories-grid {
   display: grid;
@@ -973,4 +975,22 @@ button:hover {
 .time-value {
   margin: 10px;
   display: block;
+}
+/* Настройка для Chrome, Safari и Edge */
+.modal-body::-webkit-scrollbar,
+#app::-webkit-scrollbar {
+  width: 6px; /* Ширина полосы прокрутки */
+}
+
+.modal-body::-webkit-scrollbar-thumb,
+#app::-webkit-scrollbar-thumb {
+  background-color: #cccccc; /* Цвет бегунка */
+  border-radius: 10px; /* Скругление бегунка */
+}
+
+/* Настройка для Firefox */
+.modal-body,
+#app {
+  scrollbar-width: thin;
+  scrollbar-color: #cccccc transparent;
 }
