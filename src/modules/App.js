@@ -211,7 +211,7 @@ export default class App {
   }
 
   playSound(resultName) {
-    const audio = new Audio(`./assets/audio/${resultName}.mp3`);
+    const audio = new Audio(`./assets/mp3/${resultName}.mp3`);
     audio.volume = this.settings.config.volume / 100;
     audio.currentTime = 0;
     audio.play().catch(() => console.warn("Звуковой эффект не найден"));
@@ -400,6 +400,7 @@ export default class App {
           if (this.currentGame.type === "images") itemsCount = 5;
 
           this.view.renderEndRoundModal(
+            [],
             this.currentGame.score,
             this.currentGame.numberQuestion,
             itemsCount,
