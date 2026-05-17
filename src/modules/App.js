@@ -212,7 +212,8 @@ export default class App {
 
   playSound(resultName) {
     const audio = new Audio(`./assets/mp3/${resultName}.mp3`);
-    audio.volume = this.settings.config.volume / 100;
+    // audio.volume = this.settings.config.volume / 100;
+    audio.volume = this.settings.config.volume / 150;
     audio.currentTime = 0;
     audio.play().catch(() => console.warn("Звуковой эффект не найден"));
   }
