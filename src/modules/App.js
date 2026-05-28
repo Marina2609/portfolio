@@ -35,7 +35,6 @@ export default class App {
     if (this.currentGame.type === "questions")
       correctAnswer = currentQuestion.answer;
 
-    // Для теории музыки передаем массив из одного правильного ответа
     const variants =
       this.currentGame.type === "questions"
         ? [correctAnswer]
@@ -78,12 +77,12 @@ export default class App {
 
     const result = this.currentGame.checkAnswer(userAnswer);
 
-    // Синхронизированная подсветка ответов (для квизов)
     const allButtons = document.querySelectorAll(".answer-btn");
     const currentQuestion =
       this.currentGame.questions[this.currentGame.questionIndex];
 
     let correctValue = "";
+
     if (this.currentGame.type === "audio")
       correctValue = `${currentQuestion.name} — ${currentQuestion.category}`;
     if (this.currentGame.type === "images")
@@ -149,20 +148,18 @@ export default class App {
   }
 
   handleBlitzAnswer(userChoice) {
-    if (!this.blitzGame) return; // Защита от кликов, если игра уже завершена
+    if (!this.blitzGame) return;
 
     this.blitzGame.stopAudio();
 
     const isCorrect = this.blitzGame.checkAnswer(userChoice);
     this.playSound(isCorrect ? "correct" : "wrong");
 
-    // Если пройдена Супер-игра и исправлены все ошибки
     if (this.blitzGame.isSuperGame && this.blitzGame.wrongPool.length === 0) {
-      // Удаляем старое окно, если оно зависло
       const blitzModal = document.querySelector(".blitz-end-overlay");
+
       if (blitzModal) blitzModal.remove();
 
-      // Выводим финальный красивый кубок (totalQuestions ставим 0, чтобы сработал Блиц-финал) [INDEX]
       this.view.renderEndRoundModal(
         this.blitzGame.wrongPool,
         this.blitzGame.score,
@@ -173,24 +170,18 @@ export default class App {
       return;
     }
 
-    // Если ошибки еще остались, просто показываем следующий ошибочный вопрос [INDEX]
     this.showNextBlitzQuestion();
   }
 
-  //При таймауте выводим окно результатов и передаем флаг наличия ошибок
   handleBlitzTimeOut() {
     if (!this.blitzGame) return;
-    // Останавливаем таймер и музыку
+
     this.blitzGame.stopTimer();
     this.blitzGame.stopAudio();
-
-    // Сохраняем набранные очки в общую статистику Блица
     this.settings.saveBlitzResult(this.blitzGame.score);
 
-    // Проверяем: были ли ошибки в этом раунде
     const hasErrors = this.blitzGame.wrongPool.length > 0;
 
-    // передаем набранный счет и флаг наличия ошибок [INDEX]
     this.view.renderBlitzEndModal(
       this.blitzGame.score,
       this.blitzGame.numberQuestion,
@@ -198,29 +189,26 @@ export default class App {
     );
   }
 
-  // Активация Супер-игры по нажатию на кнопку в модальном окне [INDEX]
   activateSuperGame() {
     if (!this.blitzGame) return;
     this.blitzGame.numberQuestion =
       this.blitzGame.numberQuestion - this.blitzGame.wrongPool.length;
 
-    document.querySelector(".end-round-overlay").remove(); // Закрываем модалку
-    this.blitzGame.isSuperGame = true; // Включаем режим супер-игры
-    this.view.updateTimer(0); // Фиксируем таймер
-    this.showNextBlitzQuestion(); // Показываем первый ошибочный вопрос
+    document.querySelector(".end-round-overlay").remove();
+    this.blitzGame.isSuperGame = true;
+    this.view.updateTimer(0);
+    this.showNextBlitzQuestion();
   }
 
   playSound(resultName) {
     const audio = new Audio(`./assets/mp3/${resultName}.mp3`);
-    // audio.volume = this.settings.config.volume / 100;
-    audio.volume = this.settings.config.volume / 1000;
+    audio.volume = this.settings.config.volume / 100;
     audio.currentTime = 0;
     audio.play().catch(() => console.warn("Звуковой эффект не найден"));
   }
 
   addEventListeners() {
     document.addEventListener("click", (e) => {
-      // 1. Навигация главного меню
       if (e.target.id === "audio-btn")
         this.view.renderCategories("audio", this.settings.results);
       if (e.target.id === "images-btn")
@@ -229,8 +217,6 @@ export default class App {
         this.view.renderCategories("questions", this.settings.results);
       if (e.target.id === "settings-btn")
         this.view.renderSettings(this.settings.config);
-
-      // Раздел Блица
       if (
         e.target.id === "blitz-menu-btn" ||
         e.target.classList.contains("back-to-blitz-menu-btn")
@@ -250,7 +236,6 @@ export default class App {
         this.handleBlitzAnswer(blitzBtn.dataset.choice === "true");
       }
 
-      // 2. Навигация из результатов
       const backToCatsBtn = e.target.closest(".back-to-categories-btn");
       if (backToCatsBtn) {
         this.view.renderCategories(
@@ -260,23 +245,19 @@ export default class App {
         return;
       }
 
-      // 3. Выбор карточки категории
       const categoryCard = e.target.closest(".category-card");
       if (categoryCard && !e.target.classList.contains("results-link")) {
         const { id, type } = categoryCard.dataset;
         this.startNewRound(type, parseInt(id));
       }
 
-      // 4. Логика переворота 3D-карточки теории
       const flipCard = e.target.closest(".flip-card");
       if (flipCard) {
         flipCard.classList.add("flipped");
 
-        // Отображаем кнопку "Дальше" (СПРАВА)
         const nextTheoryBtn = document.querySelector(".next-theory-btn");
         if (nextTheoryBtn) nextTheoryBtn.style.visibility = "visible";
 
-        // Записываем true в массив изученных вопросов
         if (this.currentGame && this.currentGame.type === "questions") {
           if (
             this.currentGame.answers.length === this.currentGame.questionIndex
@@ -292,7 +273,6 @@ export default class App {
         }
       }
 
-      // 5. Экран результатов категории
       if (e.target.classList.contains("results-link")) {
         const categoryIndex = parseInt(e.target.dataset.id);
         const parentCard = e.target.closest(".category-card");
@@ -320,6 +300,7 @@ export default class App {
       }
 
       const resultCard = e.target.closest(".result-card");
+
       if (resultCard) {
         const index = parseInt(resultCard.dataset.index);
         const parent = resultCard.closest(".results-screen");
@@ -348,6 +329,7 @@ export default class App {
       }
 
       const retryBtn = e.target.closest(".retry-btn");
+
       if (retryBtn) {
         this.startNewRound(
           retryBtn.dataset.type,
@@ -355,22 +337,18 @@ export default class App {
         );
       }
 
-      // 6. Ответ на обычные вопросы квизов
       const answerBtn = e.target.closest(".answer-btn");
       if (answerBtn) {
         this.handleAnswer(answerBtn.dataset.answer);
       }
 
-      // 7. Кнопка "Дальше" в режиме изучения теории
       if (e.target.classList.contains("next-theory-btn")) {
-        // Если пользователь перешел не переворачивая — все равно фиксируем галочку
         if (
           this.currentGame.answers.length === this.currentGame.questionIndex
         ) {
           this.currentGame.answers.push(true);
         }
 
-        // Обновляем score количеством изученных вопросов для расчета звезд на карточке
         this.currentGame.score = this.currentGame.answers.filter(
           (ans) => ans === true,
         ).length;
@@ -390,7 +368,6 @@ export default class App {
         }
       }
 
-      // Стандартное модальное окно переходов в квизах
       if (e.target.classList.contains("next-btn")) {
         document.querySelector(".modal-overlay").remove();
         if (this.currentGame.nextQuestion()) {
@@ -416,7 +393,6 @@ export default class App {
         this.view.renderCategories(type, this.settings.results);
       }
 
-      // 8. Общий выход (Home / Back / Прервать изучение)
       const quitBtn =
         e.target.closest(".quit-blitz-btn") ||
         e.target.closest(".quit-btn") ||
@@ -431,7 +407,6 @@ export default class App {
           }
           this.currentGame.stopAudio();
 
-          // Если выходим из теории — принудительно сохраняем сгенерированный массив
           this.settings.saveResult(
             this.currentGame.type,
             this.currentGame.categoryIndex,
@@ -442,7 +417,6 @@ export default class App {
           const type = this.currentGame.type;
           this.currentGame = null;
 
-          // Принудительный возврат к категориям теории, а не на главный экран
           if (type === "questions") {
             this.view.renderCategories(type, this.settings.results);
             return;
@@ -461,7 +435,6 @@ export default class App {
         this.view.renderHome();
       }
 
-      // 9. Настройки
       if (e.target.id === "volume-switch") {
         const vol = e.target.checked ? 50 : 0;
         this.settings.save({ volume: vol });
@@ -471,22 +444,17 @@ export default class App {
       if (e.target.id === "time-switch")
         this.settings.save({ timeGame: e.target.checked });
 
-      // 10. Клик по кнопке "Хочешь сыграть в Супер-игру?"
       if (e.target.classList.contains("start-super-blitz-btn")) {
-        // Удаляем окно окончания раунда Блица
         const blitzModal = document.querySelector(".blitz-end-overlay");
         if (blitzModal) blitzModal.remove();
 
         if (this.blitzGame) {
-          // Переключаем игру в фазу Супер-игры [INDEX]
           this.blitzGame.isSuperGame = true;
-          // Загружаем первый вопрос из пула ошибок и убираем таймер во View [INDEX]
           this.showNextBlitzQuestion();
         }
         return;
       }
 
-      // 11. Клик по кнопке "В главное меню Блица" (срабатывает и для кнопки завершения супер-игры)
       if (e.target.classList.contains("back-to-blitz-menu-btn")) {
         const blitzModal = document.querySelector(".blitz-end-overlay");
         if (blitzModal) blitzModal.remove();
@@ -494,8 +462,8 @@ export default class App {
         const endRoundModal = document.querySelector(".end-round-overlay");
         if (endRoundModal) endRoundModal.remove();
 
-        this.blitzGame = null; // Сбрасываем игру
-        this.view.renderBlitzMenu(this.settings.blitz); // Возврат в меню Блица
+        this.blitzGame = null;
+        this.view.renderBlitzMenu(this.settings.blitz);
         return;
       }
     });

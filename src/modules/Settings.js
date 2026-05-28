@@ -2,7 +2,6 @@ export default class Settings {
   constructor() {
     const defaultConfig = { volume: 50, timeGame: false, timeStep: 20 };
 
-    // Результаты для 3 режимов
     const defaultResults = {
       audio: Array(12).fill(null),
       images: Array(12).fill(null),

@@ -3,7 +3,6 @@ export default class View {
     this.app = document.querySelector("#app");
   }
 
-  // Создание элемента с поддержкой нескольких классов (через пробел)
   createElement(tag, className) {
     const element = document.createElement(tag);
     if (className) {
@@ -12,7 +11,6 @@ export default class View {
     return element;
   }
 
-  // 1. Главная страница
   renderHome() {
     if (!this.app) {
       this.app = document.querySelector("#app");
@@ -37,7 +35,6 @@ export default class View {
     this.app.append(container);
   }
 
-  // 2. Экран выбора категорий
   renderCategories(type, results) {
     this.app.innerHTML = "";
     const container = this.createElement("div", "categories-screen fade-in");
@@ -114,12 +111,10 @@ export default class View {
     this.app.append(container);
   }
 
-  // 3. Экран вопроса
   renderQuestion(questionData, variants, currentStep, type, answers = []) {
     this.app.innerHTML = "";
     const container = this.createElement("div", "question-screen fade-in");
 
-    // Выносим кнопку "Прервать изучение" на самый верх для режима теории
     if (type === "questions") {
       const topQuitBtn = this.createElement(
         "button",
@@ -132,8 +127,6 @@ export default class View {
       container.append(topQuitBtn);
     }
 
-    // Хедер перестроен: теперь timer-text рендерится физически ВЫШЕ, чем progress-info
-    // Добавлены инлайн-стили, чтобы превратить строку в колонку и выровнять элементы по центру/краям
     const header = this.createElement("div", "question-header");
 
     header.innerHTML = `
@@ -142,7 +135,6 @@ export default class View {
         `;
     container.append(header);
 
-    // Блок точек-индикаторов рендерится строго ПОД номером вопроса
     let totalSteps = 10;
     if (type === "audio") totalSteps = 15;
     if (type === "images") totalSteps = 5;
@@ -157,7 +149,6 @@ export default class View {
     }
     container.append(bulletContainer);
 
-    // Заголовок вопроса
     const title = this.createElement("h3", "question-title");
     title.style.marginTop = "15px";
     if (type === "audio")
@@ -166,7 +157,6 @@ export default class View {
     if (type === "questions") title.textContent = "ИЗУЧЕНИЕ ТЕОРИИ МУЗЫКИ";
     container.append(title);
 
-    // А. Интерфейс для аудио-квиза
     if (type === "audio") {
       const vinylWrap = this.createElement("div", "vinyl-container");
       vinylWrap.innerHTML = `
@@ -177,14 +167,12 @@ export default class View {
       container.append(vinylWrap);
     }
 
-    // Б. Интерфейс для композиторов
     if (type === "images") {
       const imgWrap = this.createElement("div", "question-image");
       imgWrap.innerHTML = `<img src="./assets/img/${questionData.imageNum}.jpg">`;
       container.append(imgWrap);
     }
 
-    // В. Интерфейс для теории
     if (type === "questions") {
       const flipContainer = this.createElement("div", "flip-card-container");
       flipContainer.innerHTML = `
@@ -215,7 +203,6 @@ export default class View {
       return;
     }
 
-    // Стандартная сетка вариантов ответов
     const grid = this.createElement("div", "answers-grid");
     variants.forEach((variant) => {
       const btn = this.createElement("button", "answer-btn");
@@ -228,7 +215,6 @@ export default class View {
     this.app.append(container);
   }
 
-  // 4. Экран Блиц-Вопроса
   renderBlitzQuestion(questionData, score, numberQuestion, timeLeft) {
     this.app.innerHTML = "";
     const container = this.createElement(
@@ -274,7 +260,6 @@ export default class View {
     this.app.append(container);
   }
 
-  // 5. Главное меню Блица со статистикой
   renderBlitzMenu(stats) {
     this.app.innerHTML = "";
     const container = this.createElement("div", "categories-screen fade-in");
@@ -290,7 +275,6 @@ export default class View {
     this.app.append(container);
   }
 
-  // 6. Экран результатов категории
   renderResults(
     categoryData,
     categoryResults,
@@ -355,7 +339,6 @@ export default class View {
         card.style.borderRadius = "6px";
         card.style.cursor = "pointer";
         card.style.textAlign = "left";
-        // card.style.width = "100%";
       } else {
         if (!isCorrect) card.classList.add("grayscale");
       }
@@ -387,7 +370,6 @@ export default class View {
     this.app.append(container);
   }
 
-  // 7. Всплывающее окно информации по клику в результатах
   renderPictureInfoModal(item, type) {
     const overlay = this.createElement(
       "div",
@@ -396,7 +378,6 @@ export default class View {
     let contentHTML = "";
 
     if (type === "images") {
-      // ИСПРАВЛЕНО: Полностью убрали вывод pieceName («Произведение»)
       contentHTML = `
                 <img src="./assets/img/${item.imageNum}.jpg" class="modal-img">
                 <p class="pic-author" style="font-weight: bold; margin-top: 15px; font-size: 1.2rem; color: #000000;">${item.author || "Неизвестен"}</p>
@@ -415,7 +396,6 @@ export default class View {
             `;
     }
 
-    // ИСПРАВЛЕНО: Кнопка закрытия гарантированно использует глобальный класс menu-btn общего стиля приложения
     overlay.innerHTML = `
             <div class="modal-content">
                 ${contentHTML}
@@ -425,7 +405,6 @@ export default class View {
     document.body.append(overlay);
   }
 
-  // 8. Модальное окно (после ответа на вопрос)
   renderModal(isCorrect, correctData, type) {
     const overlay = this.createElement("div", "modal-overlay active");
     let contentHTML = "";
@@ -456,7 +435,6 @@ export default class View {
     document.body.append(overlay);
   }
 
-  // 9. Финальное окно окончания раунда
   renderEndRoundModal(wrongPool, score, numberQuestion, totalQuestions) {
     const overlay = this.createElement(
       "div",
@@ -475,7 +453,6 @@ export default class View {
     document.body.append(overlay);
   }
 
-  // 10. Обновление таймера
   updateTimer(seconds) {
     const timer = document.querySelector(".timer-text");
     if (!timer) return;
@@ -486,7 +463,6 @@ export default class View {
     if (seconds <= 5) timer.classList.add("warning");
   }
 
-  // 11. Настройки
   renderSettings(config) {
     this.app.innerHTML = "";
     const container = this.createElement("div", "settings-screen fade-in");
@@ -524,14 +500,12 @@ export default class View {
     this.app.append(container);
   }
 
-  // 12. Интерактивное модальное окно окончания Блиц-раунда [INDEX]
   renderBlitzEndModal(score, numberQuestion, hasErrors = false) {
     const overlay = this.createElement(
       "div",
       "modal-overlay active blitz-end-overlay",
     );
 
-    // Кнопка Супер-игры генерируется только при наличии неисправленных ошибок раунда [INDEX]
     const superGameButtonHTML = hasErrors
       ? `<button class="menu-btn start-super-blitz-btn" style="background-color: #ff9800 !important;">Хочешь сыграть в Супер-игру?</button>`
       : `<p style="color: #4caf50; font-weight: bold; margin-bottom: 10px;">✨ Идеальный раунд без ошибок! ✨</p>`;

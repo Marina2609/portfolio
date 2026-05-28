@@ -9,10 +9,11 @@ body {
   justify-content: center;
   align-items: center;
   background-image: url("../assets/png/background.png");
-  background-size: cover; /* Растягивает картинку по всей площади окна */
-  background-position: center; /* Центрирует изображение */
+  background-size: cover;
+  background-position: center;
   background-repeat: no-repeat;
 }
+
 #app {
   margin: 50px auto;
   max-width: 500px;
@@ -25,17 +26,20 @@ body {
   overflow-y: auto;
   max-height: 75vh;
 }
+
 .categories-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 10px;
   margin: 20px 0;
 }
+
 .category-card {
   border: 1px solid #ddd;
   padding: 15px;
   border-radius: 10px;
 }
+
 button {
   padding: 10px 20px;
   margin: 5px;
@@ -45,6 +49,7 @@ button {
   background: #007bff;
   color: white;
 }
+
 button:hover {
   background: #0056b3;
 }
@@ -64,7 +69,6 @@ button:hover {
   }
 }
 
-/* Затемнение фона */
 .modal-overlay {
   position: fixed;
   top: 0;
@@ -85,7 +89,6 @@ button:hover {
   pointer-events: all;
 }
 
-/* Само окно */
 .modal-content {
   background: white;
   padding: 20px;
@@ -122,10 +125,9 @@ button:hover {
   width: 100%;
   height: 100px;
   object-fit: cover;
-  filter: grayscale(100%); /* По ТЗ: пока не пройдено — серое */
+  filter: grayscale(100%);
 }
 
-/* Анимация появления */
 .fade-in {
   animation: fadeIn 0.4s ease-out;
 }
@@ -141,7 +143,6 @@ button:hover {
   }
 }
 
-/* По умолчанию все картинки в категориях серые */
 .category-card img {
   width: 100%;
   height: 100px;
@@ -150,7 +151,6 @@ button:hover {
   transition: 0.3s;
 }
 
-/* Если есть класс played — делаем цветной */
 .category-card.played img {
   filter: grayscale(0);
 }
@@ -228,10 +228,9 @@ button:hover {
 }
 
 .timer-text {
-  font-family: "Monospace", sans-serif; /* Для фиксированной ширины цифр */
+  font-family: "Monospace", sans-serif;
   font-size: 1.5rem;
   color: #666;
-  /* position: absolute; */
   top: 20px;
   right: 40px;
 }
@@ -249,7 +248,7 @@ button:hover {
 }
 
 .quit-btn {
-  background-color: #ff4d4d; /* Красный цвет для выхода */
+  background-color: #ff4d4d;
   color: white;
   border: none;
   padding: 10px 20px;
@@ -267,19 +266,19 @@ button:hover {
 .bullet {
   width: 12px;
   height: 12px;
-  background-color: #a0a0a0; /* Серый цвет для неактивных */
+  background-color: #a0a0a0;
   border-radius: 50%;
   transition: background-color 0.3s;
 }
 
 .bullet.correct {
-  background-color: #4caf50; /* Зеленый для правильных */
+  background-color: #4caf50;
 }
 
 .bullet.wrong {
-  background-color: #f44336; /* Красный для ошибок */
+  background-color: #f44336;
 }
-/* Эффект для непройденных категорий */
+
 .grayscale {
   filter: grayscale(100%);
   opacity: 0.7;
@@ -294,25 +293,24 @@ button:hover {
   padding-bottom: 15px;
 }
 
-/* Звезды */
 .stars-list {
-  color: #ddd; /* Цвет пустых звезд */
+  color: #ddd;
   font-size: 1.2rem;
   margin: 8px 0;
 }
 
 .stars-list .active {
-  color: #ffd700; /* Золотой цвет для заработанных звезд */
+  color: #ffd700;
   text-shadow: 0 0 5px rgba(255, 215, 0, 0.5);
 }
 
 .stars-list .fas {
-  color: #ddd; /* Цвет пустых звезд (серый) */
+  color: #ddd;
   margin: 0 2px;
 }
 
 .stars-list .fas.active {
-  color: #ffd700; /* Золотой цвет для активных звезд */
+  color: #ffd700;
 }
 
 .stars-list i {
@@ -321,9 +319,8 @@ button:hover {
   min-height: 20px;
 }
 
-/* Кнопка результаты */
 .results-link {
-  display: none; /* Скрыта по умолчанию */
+  display: none;
   background: #e0e0e0;
   border: none;
   border-radius: 20px;
@@ -336,6 +333,7 @@ button:hover {
 .results-link.visible {
   display: inline-block;
 }
+
 .results-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
@@ -372,7 +370,7 @@ button:hover {
 }
 
 .retry-btn {
-  background-color: #ffd700; /* Золотой цвет */
+  background-color: #ffd700;
   color: #000;
   border: none;
   padding: 10px 25px;
@@ -390,21 +388,21 @@ button:hover {
   filter: brightness(1.1);
 }
 
-/* Карточки для викторины про ХУДОЖНИКОВ */
 .category-card.artists-card {
-  border-top: 5px solid #610e00; /* Бордовая верхняя рамка */
-  background: #fffdfb; /* Слегка теплый фон карточки */
+  border-top: 5px solid #610e00;
+  background: #fffdfb;
 }
+
 .category-card.artists-card .category-name {
   color: #610e00;
   font-weight: bold;
 }
 
-/* Карточки для викторины про КАРТИНЫ */
 .category-card.pictures-card {
-  border-top: 5px solid #1a3c40; /* Темно-бирюзовая верхняя рамка */
-  background: #f7f9f9; /* Слегка холодный фон карточки */
+  border-top: 5px solid #1a3c40;
+  background: #f7f9f9;
 }
+
 .category-card.pictures-card .category-name {
   color: #1a3c40;
   font-weight: bold;
@@ -434,13 +432,13 @@ button:hover {
 
 .highlight-score {
   font-weight: bold;
-  color: #4caf50; /* Зеленый цвет для очков */
+  color: #4caf50;
   font-size: 1.6rem;
 }
 
 .highlight-numberQuestion {
   font-weight: bold;
-  color: #8d5d99; /* Зеленый цвет для очков */
+  color: #8d5d99;
   font-size: 1.6rem;
 }
 
@@ -460,7 +458,6 @@ button:hover {
   background-color: #7d1300;
 }
 
-/* Базовая плавная анимация для экранов */
 .fade-in {
   animation: fadeInUp 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
   will-change: opacity, transform;
@@ -477,7 +474,6 @@ button:hover {
   }
 }
 
-/* Эффект сложной анимации: Пульсирующий Скелетон */
 .skeleton {
   background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
   background-size: 200% 100%;
@@ -495,7 +491,6 @@ button:hover {
   }
 }
 
-/* Специфичные размеры для заглушек-скелетонов */
 .question-image.skeleton {
   width: 100%;
   max-width: 500px;
@@ -507,10 +502,9 @@ button:hover {
   width: 100%;
   height: 120px;
   border: none;
-  pointer-events: none; /* Блокируем клики во время загрузки */
+  pointer-events: none;
 }
 
-/* Микровзаимодействия для элементов управления */
 .answer-btn,
 .menu-btn,
 .category-card {
@@ -531,7 +525,6 @@ button:hover {
   transform: scale(0.98);
 }
 
-/* Пульсация предупреждения таймера */
 .timer-text.warning {
   color: #f44336;
   animation: pulseTimer 0.5s infinite alternate;
@@ -549,6 +542,7 @@ button:hover {
 .blitz-theme-btn {
   background-color: #ff9800 !important;
 }
+
 .blitz-stats-card {
   background: #f5f5f5;
   padding: 20px;
@@ -557,12 +551,14 @@ button:hover {
   max-width: 400px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
+
 .blitz-answers-grid {
   display: flex;
   gap: 20px;
   justify-content: center;
   margin: 30px 0;
 }
+
 .blitz-btn {
   padding: 15px 50px;
   font-size: 1.5rem;
@@ -572,36 +568,37 @@ button:hover {
   cursor: pointer;
   color: white;
 }
+
 .answer-yes {
   background-color: #4caf50;
 }
+
 .answer-no {
   background-color: #f44336;
 }
 
-/* --- Подсветка для текстовых кнопок (Режим Artists) --- */
 .artists-answers .answer-btn.correct-choice {
-  background-color: #4caf50 !important; /* Зеленый фон */
+  background-color: #4caf50 !important;
   color: #ffffff !important;
   border-color: #4caf50 !important;
 }
 
 .artists-answers .answer-btn.wrong-choice {
-  background-color: #f44336 !important; /* Красный фон */
+  background-color: #f44336 !important;
   color: #ffffff !important;
   border-color: #f44336 !important;
 }
 
-/* --- Подсветка рамки для картинок-ответов (Режим Pictures) --- */
 .pictures-answers .answer-btn.correct-choice {
-  border: 4px solid #4caf50 !important; /* Толстая зеленая рамка */
-  box-shadow: 0 0 12px rgba(76, 175, 80, 0.7); /* Внутреннее/внешнее свечение */
+  border: 4px solid #4caf50 !important;
+  box-shadow: 0 0 12px rgba(76, 175, 80, 0.7);
 }
 
 .pictures-answers .answer-btn.wrong-choice {
-  border: 4px solid #f44336 !important; /* Толстая красная рамка */
-  box-shadow: 0 0 12px rgba(244, 67, 54, 0.7); /* Внутреннее/внешнее свечение */
+  border: 4px solid #f44336 !important;
+  box-shadow: 0 0 12px rgba(244, 67, 54, 0.7);
 }
+
 .audio-visualizer {
   width: 180px;
   height: 180px;
@@ -621,6 +618,7 @@ button:hover {
   align-items: center;
   justify-content: center;
 }
+
 .vinyl-center {
   width: 40px;
   height: 40px;
@@ -629,31 +627,24 @@ button:hover {
   border: 3px solid #000;
 }
 
-/* ==========================================================================
-   ПОДСВЕТКА ВЫБРАННЫХ ОТВЕТОВ (РЕЖИМ ИГРЫ)
-   ========================================================================== */
-
-/* 1. Если ответ правильный (или подсвечивается верный при ошибке) */
 .answers-grid .answer-btn.correct-choice,
 .blitz-answers-grid .blitz-btn.correct-choice {
-  background-color: #4caf50 !important; /* Насыщенный зеленый */
+  background-color: #4caf50 !important;
   color: #ffffff !important;
   border-color: #4caf50 !important;
   font-weight: bold;
   box-shadow: 0 0 10px rgba(76, 175, 80, 0.6) !important;
 }
 
-/* 2. Если ответ неправильный */
 .answers-grid .answer-btn.wrong-choice,
 .blitz-answers-grid .blitz-btn.wrong-choice {
-  background-color: #f44336 !important; /* Яркий красный */
+  background-color: #f44336 !important;
   color: #ffffff !important;
   border-color: #f44336 !important;
   font-weight: bold;
   box-shadow: 0 0 10px rgba(244, 67, 54, 0.6) !important;
 }
 
-/* Дополнительно: плавное включение цвета для лучшего визуала */
 .answer-btn,
 .blitz-btn {
   transition:
@@ -684,16 +675,16 @@ button:hover {
   );
   border-radius: 50%;
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
-  display: flex; /* ДОБАВЛЕНО для идеального */
-  justify-content: center; /* центрирования оранжевого */
-  align-items: center; /* круга внутри диска */
+  display: flex;
+  justify-content: center;
+  align-items: center;
   animation: spinVinyl 4s linear infinite;
 }
 
 .vinyl-center {
   width: 50px;
   height: 50px;
-  background-color: #ff9800; /* Оранжевый цвет как на скрине */
+  background-color: #ff9800;
   border-radius: 50%;
   border: 4px solid #111111;
 }
@@ -706,31 +697,12 @@ button:hover {
     transform: rotate(360deg);
   }
 }
-/* ==========================================================================
-   ИСПРАВЛЕННЫЕ СТИЛИ ДЛЯ МОДАЛЬНОГО ОКНА
-   ========================================================================== */
 
-/* Темный оверлей на весь экран */
-/* .modal-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background-color: rgba(0, 0, 0, 0.7);
-  display: flex !important;
-  justify-content: center;
-  align-items: center;
-  z-index: 2000;
-  padding: 20px;
-} */
-
-/* Белая карточка по центру */
 .modal-content {
   background: #ffffff;
   padding: 30px 25px;
   width: 100%;
-  max-width: 250px; /* Ограничивает ширину окна, чтобы оно не расползалось */
+  max-width: 250px;
   text-align: center;
   box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
   border-radius: 4px;
@@ -740,11 +712,10 @@ button:hover {
   gap: 15px;
 }
 
-/* Ограничение размеров картинки внутри модалки */
 .modal-img {
   width: 100%;
-  max-height: 250px; /* Защита от огромных размеров картинки */
-  object-fit: contain; /* Картинка масштабируется без искажений */
+  max-height: 250px;
+  object-fit: contain;
   margin: 10px 0;
   border-radius: 4px;
 }
@@ -753,16 +724,17 @@ button:hover {
   filter: brightness(1.2);
 }
 
-/* Иконка правильного/неправильного ответа */
 .icon {
   width: 40px;
   height: 40px;
   border-radius: 50%;
   margin: 0 auto;
 }
+
 .icon.correct {
   background-color: #4caf50;
 }
+
 .icon.wrong {
   background-color: #f44336;
 }
@@ -772,8 +744,9 @@ button:hover {
   font-weight: bold;
   color: #000000;
 }
+
 .next-theory-btn {
-  background-color: #ff9800; /* Выделяющийся оранжевый цвет для режима изучения */
+  background-color: #ff9800;
   color: white;
   border: none;
   padding: 12px 30px;
@@ -782,14 +755,13 @@ button:hover {
   cursor: pointer;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
 }
+
 .next-theory-btn:hover {
   filter: brightness(1.1);
 }
-/* ==========================================================================
-   СТИЛИ ДЛЯ ПЕРЕВОРАЧИВАЮЩЕЙСЯ КАРТОЧКИ ТЕОРИИ
-   ========================================================================== */
+
 .flip-card-container {
-  perspective: 1000px; /* Создает 3D-пространство */
+  perspective: 1000px;
   width: 100%;
   max-width: 500px;
   height: 280px;
@@ -806,7 +778,6 @@ button:hover {
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
 }
 
-/* Класс, который будет добавляться через JS при клике */
 .flip-card.flipped {
   transform: rotateY(180deg);
 }
@@ -818,12 +789,11 @@ button:hover {
   position: absolute;
   top: 0;
   left: 0;
-  backface-visibility: hidden; /* Скрывает изнаночную сторону при перевороте */
+  backface-visibility: hidden;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  /* padding: 2rem 1.5rem; */
   border-radius: 8px;
   border: 1px solid #ddd;
   background: #ffffff;
@@ -835,11 +805,10 @@ button:hover {
 
 .flip-card-back {
   background: #ffffff;
-  transform: rotateY(180deg); /* Изначально развернута в 3D */
-  border: 2px solid #4caf50; /* Зеленая рамка для ответа */
+  transform: rotateY(180deg);
+  border: 2px solid #4caf50;
 }
 
-/* Текст внутри карточки */
 .card-text {
   font-size: 1.25rem;
   line-height: 1.5;
@@ -849,7 +818,6 @@ button:hover {
   margin: auto 0;
 }
 
-/* Бейджи "Вопрос" / "Ответ" */
 .card-badge {
   position: absolute;
   top: 15px;
@@ -868,14 +836,12 @@ button:hover {
   background: #4caf50;
 }
 
-/* Подсказка внизу лицевой стороны */
 .flip-hint {
   font-size: 0.85rem;
   color: #777777;
   margin-top: auto;
 }
 
-/* Стандартная сетка кнопок управления теорией */
 .theory-controls-grid {
   display: flex;
   flex-direction: column;
@@ -886,21 +852,20 @@ button:hover {
 }
 .theory-inline-controls {
   display: flex;
-  justify-content: space-between; /* Распределяет кнопки по краям: одну влево, другую вправо */
+  justify-content: space-between;
   align-items: center;
   width: 100%;
-  max-width: 500px; /* Должна совпадать с максимальной шириной карточки теории */
+  max-width: 500px;
   margin: 20px auto 0 auto;
   gap: 20px;
 }
 
-/* Стилизуем кнопки внутри этого контейнера, чтобы они были одинакового компактного размера */
 .theory-inline-controls .menu-btn {
   flex: 1;
   margin: 0 !important;
   padding: 12px 15px;
   font-size: 16px;
-  white-space: nowrap; /* Защита от переноса текста на кнопке */
+  white-space: nowrap;
 }
 
 .category-header {
@@ -926,45 +891,36 @@ button:hover {
   margin: 0 0 40px;
 }
 
-/* Контейнер модального окна должен иметь относительное позиционирование */
 .modal-content {
   position: relative;
-  /* background: #333; Цвет фона окна как на фото */
   border-radius: 15px;
-  padding: 30px 20px 20px 20px; /* Верхний паддинг больше, чтобы текст не упирался в иконку */
-  /* Ваши остальные стили для окна */
+  padding: 30px 20px 20px 20px;
 }
 
-/* Общие стили для круглой иконки */
 .icon {
   position: absolute;
   top: 0;
   left: 50%;
-  transform: translate(
-    -50%,
-    -50%
-  ); /* Сдвиг на 50% вверх и влево для идеального центрирования */
-  width: 50px; /* Размер кружка */
+  transform: translate(-50%, -50%);
+  width: 50px;
   height: 50px;
-  border-radius: 50%; /* Делает элемент круглым */
+  border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   color: white;
   font-size: 24px;
   font-weight: bold;
-  border: 3px solid #333; /* Бордюр под цвет фона окна, чтобы визуально отделить круг */
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); /* Легкая тень */
+  border: 3px solid #333;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
 }
 
-/* Вариант для неверного ответа (как на фото) */
 .icon.wrong {
-  background-color: #f44336; /* Красный цвет */
+  background-color: #f44336;
 }
 
-/* Вариант для правильного ответа */
 .icon.correct {
-  background-color: #4caf50; /* Зеленый цвет */
+  background-color: #4caf50;
 }
 
 .menu-buttons {
@@ -978,23 +934,23 @@ button:hover {
   left: 0;
   font-size: 22px;
 }
+
 .time-value {
   margin: 10px;
   display: block;
 }
-/* Настройка для Chrome, Safari и Edge */
+
 .modal-body::-webkit-scrollbar,
 #app::-webkit-scrollbar {
-  width: 6px; /* Ширина полосы прокрутки */
+  width: 6px;
 }
 
 .modal-body::-webkit-scrollbar-thumb,
 #app::-webkit-scrollbar-thumb {
-  background-color: #cccccc; /* Цвет бегунка */
-  border-radius: 10px; /* Скругление бегунка */
+  background-color: #cccccc;
+  border-radius: 10px;
 }
 
-/* Настройка для Firefox */
 .modal-body,
 #app {
   scrollbar-width: thin;
