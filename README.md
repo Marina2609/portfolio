@@ -50,7 +50,7 @@
 
 1. Клонируйте репозиторий:
    ```bash
-   git clone https://github.com
+   git clone https://github.com/Marina2609
    cd portfolio
    ```
 2. Переключитесь на ветку проекта:
