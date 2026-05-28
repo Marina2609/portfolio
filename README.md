@@ -25,7 +25,7 @@
 1. Клонируйте репозиторий и перейдите в ветку проекта:
 
    ```bash
-   git clone https://github.com
+   git clone https://github.com/Marina2609
    cd portfolio
    git checkout vertical-slider
    ```
