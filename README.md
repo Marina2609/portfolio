@@ -1,70 +1,61 @@
-# Getting Started with Create React App
+# 🇬🇧 RS Lang — Web Application for Learning English
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Комплексное интерактивное Single-page Application (SPA) для эффективного изучения иностранных слов. Проект включает в себя электронный учебник со структурированной базой данных слов, интерактивные мини-игры для закрепления материала, а также дашборд персональной статистики для детального отслеживания индивидуального прогресса пользователя.
 
-## Available Scripts
+## 🛠️ Стек технологий и инструменты
 
-In the project directory, you can run:
+- **Frontend:** React (Functional Components, Hooks), TypeScript, React Router DOM
+- **Стилизация и адаптив:** CSS3 (Flexbox, Grid), `react-responsive` для отзывчивой кроссбраузерной верстки
+- **Инструменты и библиотеки:** `react-paginate` (пагинация списков слов), `react-countdown-circle-timer` (анимация таймеров в играх)
+- **Качество кода:** ESLint, Prettier, TypeScript Strict Mode
+- **Архитектура данных:** Взаимодействие с удаленным REST API (регистрация/авторизация, прогресс изучения слов, статистика)
 
-### `npm start`
+---
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## 💡 Архитектурные модули и функционал
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+Приложение разбито на ключевые функциональные блоки:
 
-### `npm test`
+1. **📖 Электронный учебник (Textbook):**
+   - Разбиение базы данных слов на разделы по уровням сложности (A1–C2).
+   - Реализация плавной постраничной пагинации больших объемов данных с помощью компонента `react-paginate`.
+   - Маркировка слов («сложные», «изученные») с сохранением их статуса на бэкенде для авторизованных пользователей.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+2. **🎮 Интерактивные мини-игры:**
+   - **«Спринт» и «Аудиовызов»:** Игровые механики для тренировки восприятия речи на слух и быстрого перевода слов на время.
+   - Интеграция кастомных круговых таймеров на базе `react-countdown-circle-timer` для геймификации процесса.
 
-### `npm run build`
+3. **📊 Дашборд долгосрочной статистики:**
+   - Отслеживание метрик прогресса: количество изученных слов за день, процент правильных ответов, длина серии правильных ответов.
+   - Сохранение, агрегация и синхронизация аналитических данных между сессиями пользователя.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+---
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## 🏗️ Преимущества технической реализации
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- **Строгая типизация (TypeScript):** Архитектура проекта на 73% состоит из TypeScript. Все интерфейсы данных (пользователи, слова, статистика, ответы) строго типизированы, что исключает появление runtime-ошибок.
+- **Компонентный подход:** Интерфейс декомпозирован на переиспользуемые атомарные React-компоненты с чистым однонаправленным потоком данных (Downstream data flow).
+- **Модульность:** Изолированная структура исходного кода (`src/`), настроенная строгая конфигурация линтеров (`.eslintrc`, `.prettierrc`) для поддержания высоких стандартов Clean Code.
 
-### `npm run eject`
+---
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+## 🚀 Как запустить проект локально
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+1. Клонируйте репозиторий и перейдите в рабочую директорию проекта:
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+   ```bash
+   git clone https://github.com/Marina2609
+   cd rslang
+   ```
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+2. Установите все необходимые зависимости (включая TypeScript-типы):
 
-## Learn More
+   ```bash
+   npm install
+   ```
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+3. Запустите локальный сервер для разработки (Development mode):
+   ```bash
+   npm start
+   ```
+   Приложение автоматически откроется в браузере по адресу [http://localhost:3000](http://localhost:3000).
