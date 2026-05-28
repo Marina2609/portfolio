@@ -27,31 +27,31 @@
 
 - **Стек:** Vanilla JS (Классы, ООП), Webpack 5, Web Audio API, HTML5 Canvas, CSS 3D-transforms.
 - **Что демонстрирует:** Написание сложного клиентского приложения без фреймворков. Чистая ООП-архитектура, динамический рендеринг HTML через JS, работа со звуковым движком и сборка проекта с нуля на Webpack 5.
-- **🔗 Живое демо:** [audio-quiz-mg.netlify.app](https://netlify.app)
+- **🔗 Живое демо:** [audio-quiz-mg.netlify.app](https://audio-quiz-mg.netlify.app)
 
 ### 3. 🏛️ Museum — Welcome to the Louvre
 
 - **Стек:** JavaScript (ES6+), HTML5/CSS3 (Медиа-запросы, кастомные сетки), Mapbox API.
 - **Что демонстрирует:** Идеальная семантическая верстка по Figma, кастомный HTML5 видеоплеер с индивидуальными контроллерами, бесконечные слайдеры, интерактивный калькулятор стоимости билетов с валидацией форм и интеграция кастомных карт Mapbox.
-- **🔗 Живое демо:** [museum-mg.netlify.app](https://netlify.app)
+- **🔗 Живое демо:** [museum-mg.netlify.app](museum-mg.netlify.app)
 
 ### 4. 🌅 Momentum — Dashboard Application
 
 - **Стек:** JavaScript Modules (ES-модули), Fetch API (`async/await`), Unsplash/Flickr API, OpenWeatherMap API, LocalStorage.
 - **Что демонстрирует:** Асинхронное взаимодействие с внешними REST API, декомпозиция JS-кода на модули, работа с состоянием и сохранением пользовательских настроек в LocalStorage, использование рекурсивных таймеров.
-- **🔗 Живое демо:** [momentum-mg.netlify.app](https://netlify.app)
+- **🔗 Живое демо:** [momentum-mg.netlify.app](momentum-mg.netlify.app)
 
 ### 5. ↕️ Vertical Slider — Интерфейсный компонент
 
 - **Стек:** JavaScript (Vanilla JS), CSS Transitions, Absolute Positioning, CSS Transform.
 - **Что демонстрирует:** Управление DOM-деревом, расчет высоты вьюпорта «на лету» и реализация высокопроизводительной, плавной интерфейсной анимации (60 FPS) со встречным движением контента.
-- **🔗 Живое демо:** [vertical-slider-mg.netlify.app](https://netlify.app)
+- **🔗 Живое демо:** [vertical-slider-mg.netlify.app](vertical-slider-mg.netlify.app)
 
 ### 6. 📊 Presentation — Inside React
 
 - **Стек:** Reveal.js, HTML5/CSS3, Markdown, Технический английский язык.
 - **Что демонстрирует:** Глубокое понимание теории: жизненный цикл компонентов React, Props/State, асинхронность `setState` (batching) и работа с Refs. Написана полностью на английском языке.
-- **🔗 Живое демо:** [reveal-presentation-react.netlify.app](https://netlify.app)
+- **🔗 Живое демо:** [reveal-presentation-react.netlify.app](reveal-presentation-react.netlify.app)
 
 ---
 
